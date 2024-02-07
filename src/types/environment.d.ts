@@ -7,6 +7,7 @@ declare global {
       GITHUB_CLIENT_ID: string;
       GITHUB_CLIENT_SECRET: string;
       BOOKMARKED_API_URL: string;
+      JWT_SECRET: string;
       // ENV: "test" | "dev" | "prod";
     }
   }
