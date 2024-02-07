@@ -37,8 +37,17 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## TODO
 
-- [x] Protect routes with middleware
+- [ ] Setup tRPC
+- [ ] Authentication
+  - [ ] Register API
+  - [ ] Register form
+  - [ ] Middleware
+    - [ ] Protect FE routes
+    - [ ] Protect BE routes
+  - [ ] Sign in with credentials (email & password)
+  - [ ] Signed in user can't access register or sign in page
 - [ ] Integrate with notion (button)
 - [ ] Notion template to clone
 - [ ] Bookmark tweet to notion
+- [ ] Handle expired notion's access token
 - [ ] PWA

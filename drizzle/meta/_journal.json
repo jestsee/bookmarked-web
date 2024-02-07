@@ -8,6 +8,13 @@
       "when": 1706619497301,
       "tag": "0000_friendly_robin_chapel",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1707308114257,
+      "tag": "0001_spooky_penance",
+      "breakpoints": true
     }
   ]
 }
