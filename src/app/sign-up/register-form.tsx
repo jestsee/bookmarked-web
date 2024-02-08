@@ -15,19 +15,23 @@ import {
 import { Input } from "@/components/ui/input";
 import InputPassword from "@/components/ui/input-password";
 import { CreateUserInput, createUserSchema } from "@/schema/user";
+import { trpc } from "@/trpc-client/trpc";
 
 const RegisterForm = () => {
   const form = useForm<CreateUserInput>({
     resolver: zodResolver(createUserSchema),
   });
-
-  const onSubmit = form.handleSubmit((values) => {
-    console.log(values);
+  const { reset, handleSubmit } = form;
+  const { mutate } = trpc.registerUser.useMutation({
+    onSuccess(data, variables, context) {},
+    onError(error, variables, context) {},
   });
+
+  const onSubmit = handleSubmit((values) => mutate(values));
 
   return (
     <Form {...form}>
-      <form {...{ onSubmit }}>
+      <form {...{ onSubmit }} className="w-[400px]">
         <FormField
           control={form.control}
           name="name"

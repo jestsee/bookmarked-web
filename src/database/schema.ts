@@ -5,11 +5,10 @@ import {
   primaryKey,
   text,
   timestamp,
-  uuid,
 } from "drizzle-orm/pg-core";
 
 export const users = pgTable("user", {
-  id: uuid("id").notNull().primaryKey().defaultRandom(),
+  id: text("id").notNull().primaryKey(),
   name: text("name"),
   email: text("email").notNull().unique(),
   password: text("password"),
@@ -38,7 +37,7 @@ export const accounts = pgTable(
     compoundKey: primaryKey({
       columns: [account.provider, account.providerAccountId],
     }),
-  })
+  }),
 );
 
 export const sessions = pgTable("session", {
@@ -58,5 +57,5 @@ export const verificationTokens = pgTable(
   },
   (vt) => ({
     compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
-  })
+  }),
 );
