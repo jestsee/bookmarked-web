@@ -37,12 +37,12 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## TODO
 
-- [ ] Setup tRPC
+- [x] Setup tRPC
 - [ ] Authentication
-  - [ ] Register API
-  - [ ] Register form
+  - [x] Register API
+  - [x] Register form
   - [ ] Middleware
-    - [ ] Protect FE routes
+    - [x] Protect FE routes
     - [ ] Protect BE routes
   - [ ] Sign in with credentials (email & password)
   - [ ] Signed in user can't access register or sign in page
