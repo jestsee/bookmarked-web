@@ -15,7 +15,7 @@ export const registerHandler = async ({
   const { password, ...rest } = getTableColumns(users);
   const user = await db
     .insert(users)
-    .values({ ...input, password: hashedPassword })
+    .values({ ...input, password: hashedPassword, id: crypto.randomUUID() })
     .returning(rest);
 
   return { status: "success", data: { user } };
