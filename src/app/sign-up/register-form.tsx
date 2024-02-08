@@ -13,6 +13,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import InputPassword from "@/components/ui/input-password";
 import { CreateUserInput, createUserSchema } from "@/schema/user";
 
 const RegisterForm = () => {
@@ -60,7 +61,7 @@ const RegisterForm = () => {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <InputPassword {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -73,7 +74,7 @@ const RegisterForm = () => {
             <FormItem>
               <FormLabel>Confirm password</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <InputPassword {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
