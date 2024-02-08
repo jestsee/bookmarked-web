@@ -1,4 +1,4 @@
-import authRouter from "@/app/server/auth.route";
+import authRouter from "@/server/auth.route";
 
 import { createContext } from "./trpc.context";
 import { t } from "./trpc.server";
