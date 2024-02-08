@@ -3,7 +3,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
-import { TrpcProvider } from "@/trpc-client/trpc-provider";
+import { ThemeProvider } from "@/components/providers/theme-provider";
+import { TrpcProvider } from "@/components/providers/trpc-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +21,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <TrpcProvider>{children}</TrpcProvider>
+        <TrpcProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </TrpcProvider>
       </body>
     </html>
   );
