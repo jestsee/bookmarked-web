@@ -19,6 +19,4 @@ export const registerHandler = async ({
     .returning(rest);
 
   return { status: "success", data: { user } };
-
-  // TODO register with registered email
 };

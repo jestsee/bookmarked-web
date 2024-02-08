@@ -18,4 +18,4 @@ const isAuthenticated = t.middleware(({ next, ctx }) => {
 });
 
 export const publicProcedure = t.procedure;
-export const protectedProcedure = t.procedure.use(isAuthenticated);
+export const protectedProcedure = publicProcedure.use(isAuthenticated);
