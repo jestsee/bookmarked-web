@@ -38,12 +38,13 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## TODO
 
 - [x] Setup tRPC
+- [ ] Global error handler react query
 - [ ] Authentication
   - [x] Register API
   - [x] Register form
-  - [ ] Middleware
+  - [x] Middleware
     - [x] Protect FE routes
-    - [ ] Protect BE routes
+    - [x] Protect BE routes
   - [ ] Sign in with credentials (email & password)
   - [ ] Signed in user can't access register or sign in page
 - [ ] Integrate with notion (button)
