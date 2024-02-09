@@ -46,11 +46,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
     - [x] Protect FE routes
     - [x] Protect BE routes
   - [x] Sign up error alert
-  - [ ] Sign in with credentials (email & password)
-    - [ ] Button loading
-    - [ ] Sign in error alert
-  - [ ] Signed in user can't access register or sign in page
-  - [ ] Successfully sign in/ sign up toast
+  - [x] Authenticated user can't access sign up or sign in page
 - [ ] Integrate with notion (button)
 - [ ] Notion template to clone
 - [ ] Bookmark tweet to notion
