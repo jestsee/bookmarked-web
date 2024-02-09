@@ -8,29 +8,21 @@ import { users } from "@/database/schema";
 
 export const deserializeUser = async () => {
   const cookieStore = cookies();
-  try {
-    let token;
-    const tokenStored = cookieStore.get("token");
+  let token;
+  const tokenStored = cookieStore.get("token");
 
-    if (tokenStored) {
-      token = tokenStored.value;
-    }
-
-    const notAuthenticated = { user: null };
-    if (!token) return notAuthenticated;
-
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    if (!decoded) return notAuthenticated;
-
-    const { emailVerified, password, ...rest } = getTableColumns(users);
-    const [user] = await db.select(rest).from(users).limit(1);
-
-    return { user };
-  } catch (error: any) {
-    throw new TRPCError({
-      code: "INTERNAL_SERVER_ERROR",
-      message: error.message ?? "Something went wrong",
-    });
+  if (tokenStored) {
+    token = tokenStored.value;
   }
+
+  const notAuthenticated = { user: null };
+  if (!token) return notAuthenticated;
+
+  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+  if (!decoded) return notAuthenticated;
+
+  const { emailVerified, password, ...rest } = getTableColumns(users);
+  const [user] = await db.select(rest).from(users).limit(1);
+
+  return { user };
 };
-// TODO create middleware for error handler

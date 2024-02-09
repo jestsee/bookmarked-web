@@ -45,7 +45,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
   - [x] Middleware
     - [x] Protect FE routes
     - [x] Protect BE routes
-  - [ ] Sign up error alert
+  - [x] Sign up error alert
   - [ ] Sign in with credentials (email & password)
     - [ ] Button loading
     - [ ] Sign in error alert
