@@ -14,6 +14,7 @@ export const users = pgTable("user", {
   password: text("password"),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
+  notionAccessToken: text("notionAccessToken"),
 });
 
 export const accounts = pgTable(
