@@ -37,19 +37,30 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## TODO
 
+### Chore
+
 - [x] Setup tRPC
 - [x] Global error handler react query
-- [ ] Authentication
-  - [x] Register API
-  - [x] Register form
-  - [x] Middleware
-    - [x] Protect FE routes
-    - [x] Protect BE routes
-  - [x] Sign up error alert
-  - [x] Authenticated user can't access sign up or sign in page
+
+### Authentication
+
+- [x] Register API
+- [x] Register form
+- [x] Middleware (protect both server & client routes)
+- [x] Sign up error alert
+- [x] Authenticated user can't access sign up or sign in page
+
+### Features
+
 - [ ] Integrate with notion (button)
 - [ ] Notion template to clone
 - [ ] Bookmark tweet to notion
 - [ ] Handle expired notion's access token
-- [ ] Handle error
-  - [ ] user_email_unique: email already exist
+
+### Error handler
+
+- [ ] user_email_unique: email already exist
+
+### UI
+
+- [ ] display integration status with notion `(connected/not-connected)`
