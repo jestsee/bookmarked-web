@@ -14,7 +14,6 @@ export const users = pgTable("user", {
   password: text("password"),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
-  notionAccessToken: text("notionAccessToken"),
 });
 
 export const accounts = pgTable(
@@ -58,5 +57,19 @@ export const verificationTokens = pgTable(
   },
   (vt) => ({
     compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
+  }),
+);
+
+export const notion = pgTable(
+  "notion",
+  {
+    accessToken: text("accessToken"),
+    databaseId: text("databaseId"),
+    userId: text("userId")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+  },
+  (vt) => ({
+    compoundKey: primaryKey({ columns: [vt.databaseId, vt.userId] }),
   }),
 );
