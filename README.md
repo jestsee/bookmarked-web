@@ -57,6 +57,12 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - [ ] Bookmark tweet to notion
 - [ ] Handle expired notion's access token
 
+### Pages
+
+- [ ] Dashboard `/dashboard`
+- [ ] Docs/tutorial `/docs`
+- [ ] Landing page `/`
+
 ### Error handler
 
 - [ ] user_email_unique: email already exist
