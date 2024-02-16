@@ -30,6 +30,7 @@ export default async function middleware(
   return withAuth(req as NextRequestWithAuth, event);
 }
 
+// ignore docs
 export const config = {
   matcher: ["/((?!docs).*)"],
 };
