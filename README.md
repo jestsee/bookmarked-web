@@ -55,6 +55,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - [ ] Integrate with notion (button)
 - [ ] Notion template to clone
 - [ ] Bookmark tweet to notion
+- [ ] Handle condition where's the user doesn't have any database
+- [ ] Check if the database have every needed property
 - [ ] Handle expired notion's access token
 
 ### Pages

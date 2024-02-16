@@ -4,11 +4,10 @@ import Navbar from "./_navbar";
 
 const AuthenticatedLayout = ({ children }: Layout) => {
   return (
-    <div>
+    <main>
       <Navbar />
-      <p>AuthenticatedLayout</p>
       <div>{children}</div>
-    </div>
+    </main>
   );
 };
 
