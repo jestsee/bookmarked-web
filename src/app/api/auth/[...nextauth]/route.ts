@@ -6,7 +6,7 @@ import db from "@/database/client";
 
 import credentialsProvider from "./credentials-provider";
 
-const handler = NextAuth({
+export const authOptions: NextAuthOptions = {
   session: { strategy: "jwt" },
   adapter: DrizzleAdapter(db) as NextAuthOptions["adapter"],
   providers: [
@@ -16,6 +16,8 @@ const handler = NextAuth({
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
     }),
   ],
-});
+};
+
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };

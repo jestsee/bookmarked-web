@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import InputPassword from "@/components/ui/input-password";
-import { CreateUserInput, createUserSchema } from "@/schema/user";
+import { CreateUserInput, createUserSchema } from "@/server/auth/auth.schema";
 import { trpc } from "@/trpc-client/trpc";
 
 import { FieldConfig, RenderFormProps } from "./type";

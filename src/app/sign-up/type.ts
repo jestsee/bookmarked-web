@@ -1,6 +1,6 @@
 import { UseFormReturn } from "react-hook-form";
 
-import { CreateUserInput } from "@/schema/user";
+import { CreateUserInput } from "@/server/auth/auth.schema";
 
 export interface RenderFormProps {
   form: UseFormReturn<CreateUserInput>;
