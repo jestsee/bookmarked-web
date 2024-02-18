@@ -3,13 +3,10 @@ import { getTableColumns } from "drizzle-orm";
 
 import db from "@/database/client";
 import { users } from "@/database/schema";
-import { CreateUserInput } from "@/schema/user";
+import { CreateUserInput } from "@/server/auth/auth.schema";
+import { Input } from "@/types/server";
 
-export const registerHandler = async ({
-  input,
-}: {
-  input: CreateUserInput;
-}) => {
+export const registerHandler = async ({ input }: Input<CreateUserInput>) => {
   const hashedPassword = await bcrypt.hash(input.password, 12);
 
   const { password, ...rest } = getTableColumns(users);

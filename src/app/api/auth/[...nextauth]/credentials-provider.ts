@@ -31,6 +31,8 @@ const credentialsProvider = CredentialsProvider({
 
     if (!isPasswordMatch) return null;
 
+    // TODO need to do something so the trpc server aware that the user already logged in
+
     return userWithoutPassword;
   },
 });

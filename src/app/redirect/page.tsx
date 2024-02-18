@@ -1,15 +1,15 @@
 "use client";
 
-import { useMutation } from "@tanstack/react-query";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { redirect, useSearchParams } from "next/navigation";
+import { ReactNode, useEffect } from "react";
 
 import { ExclamationCircle } from "@/components/icons";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
+import { trpc } from "@/trpc-client/trpc";
 
-const _renderErrorAlert = () => {
+const _renderErrorAlert = (): ReactNode => {
   return (
     <>
       <Alert variant="destructive">
@@ -26,29 +26,35 @@ const _renderErrorAlert = () => {
   );
 };
 
-const Redirect = () => {
-  const searchParams = useSearchParams();
-  const code = searchParams.get("code");
-  const error = searchParams.get("error");
+const _proceedRedirect = ({ code }: { code: string }): ReactNode => {
+  const { mutate, error } = trpc.connectToNotion.useMutation({
+    onSuccess() {
+      redirect("/dashboard");
+    },
+  });
 
   useEffect(() => {
-    if (error) return;
-  }, [error]);
+    mutate({ code });
+  }, [code, mutate]);
+
+  if (error) return <p>{JSON.stringify(error)}</p>;
+
+  return (
+    <p>You will be redirect automatically if this process is successful</p>
+  );
+};
+
+const Redirect = () => {
+  const searchParams = useSearchParams();
+  const error = searchParams.get("error");
 
   if (error) return _renderErrorAlert();
 
-  /**
-   * 1. sign up/ sign in dulu (next auth?)
-   * 2. connect do notion -> pake useEffect langsung simpan code nya di db (hit API nest js)
-   * 3. ...
-   */
+  const code = searchParams.get("code");
 
-  return (
-    <>
-      <p>{code}</p>
-      <div>Redirect</div>
-    </>
-  );
+  if (!code) return <p>The code does not exist</p>;
+
+  return _proceedRedirect({ code });
 };
 
 export default Redirect;
