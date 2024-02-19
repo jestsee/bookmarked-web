@@ -11,7 +11,7 @@ export const createAccessTokenResponse = object({
   access_token: string(),
 });
 
-export const databaseIdResponse = object({
+export const getDatabaseIdResponse = object({
   id: string(),
 });
 
@@ -19,4 +19,4 @@ export type CreateAccessTokenPayload = TypeOf<typeof createAccessTokenPayload>;
 export type CreateAccessTokenResponse = TypeOf<
   typeof createAccessTokenResponse
 >;
-export type DatabaseIdResponse = TypeOf<typeof databaseIdResponse>;
+export type DatabaseIdResponse = TypeOf<typeof getDatabaseIdResponse>;
