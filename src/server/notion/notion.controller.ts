@@ -14,11 +14,13 @@ export const connectToNotionHandler = async ({
 }: Input<CreateAccessTokenPayload> & { userId: string }) => {
   // get access token
   const accessTokenResponse = await fetch(
-    `${process.env.BOOKMARKED_API_URL}/notion/generate-access-token`,
+    `https://${process.env.BOOKMARKED_API_URL}/notion/generate-access-token`,
     { method: "POST", body: JSON.stringify(input) },
   );
   const accessTokenData = await accessTokenResponse.json();
   const accessTokenValid = createAccessTokenResponse.safeParse(accessTokenData);
+
+  console.log({ input, accessTokenData, accessTokenValid });
 
   if (!accessTokenValid.success) {
     // TODO handle error
@@ -27,7 +29,7 @@ export const connectToNotionHandler = async ({
 
   // get databaseId
   const databaseResponse = await fetch(
-    `${process.env.BOOKMARKED_API_URL}/notion/database`,
+    `https://${process.env.BOOKMARKED_API_URL}/notion/database`,
     {
       method: "GET",
       headers: { "access-token": accessTokenValid.data.access_token },

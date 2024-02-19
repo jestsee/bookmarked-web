@@ -1,8 +1,8 @@
 import { getTableColumns } from "drizzle-orm";
-import jwt from "jsonwebtoken"; // TODO remove package
+import jwt from "jsonwebtoken"; // TODO remove this package?
 import { cookies } from "next/headers";
 import { NextRequest } from "next/server";
-import { getServerSession } from "next-auth";
+import { getToken } from "next-auth/jwt";
 
 import db from "@/database/client";
 import { users } from "@/database/schema";
@@ -11,7 +11,6 @@ export const _deserializeUser = async () => {
   const cookieStore = cookies();
   let token;
   const tokenStored = cookieStore.get("next-auth.session-token");
-  console.log("masuk kah", { tokenStored });
 
   if (tokenStored) {
     token = tokenStored.value;
@@ -21,7 +20,6 @@ export const _deserializeUser = async () => {
   if (!token) return notAuthenticated;
 
   const decoded = jwt.verify(token, process.env.NEXTAUTH_SECRET);
-  console.log({ decoded });
   if (!decoded) return notAuthenticated;
 
   const { emailVerified, password, ...rest } = getTableColumns(users);
@@ -30,15 +28,15 @@ export const _deserializeUser = async () => {
   return { user };
 };
 
-export const deserializeUser = async (request: NextRequest) => {
-  const session = await getServerSession(request);
+// TODO user object need to have property id, notion accessToken and databaseId
 
-  console.log("masok", { session });
-  if (!session || !session.user) {
+export const deserializeUser = async (req: NextRequest) => {
+  const token = await getToken({ req });
+
+  if (!token || !token.sub) {
     return { user: null };
   }
 
-  // TODO user object need to have property id, notion accessToken and databaseId
-
-  return { user: session.user };
+  const { picture: image, sub: id, ...rest } = token;
+  return { user: { ...rest, image, id } };
 };
