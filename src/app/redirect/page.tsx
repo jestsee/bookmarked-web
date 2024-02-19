@@ -35,7 +35,8 @@ const _proceedRedirect = ({ code }: { code: string }): ReactNode => {
 
   useEffect(() => {
     mutate({ code });
-  }, [code, mutate]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (error) return <p>{JSON.stringify(error)}</p>;
 

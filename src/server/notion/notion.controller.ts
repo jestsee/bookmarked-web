@@ -1,11 +1,12 @@
 import db from "@/database/client";
 import { notion } from "@/database/schema";
+import { validateResponse } from "@/lib/validation";
 import { Input } from "@/types/server";
 
 import {
   CreateAccessTokenPayload,
   createAccessTokenResponse,
-  databaseIdResponse,
+  getDatabaseIdResponse,
 } from "./notion.schema";
 
 export const connectToNotionHandler = async ({
@@ -14,39 +15,42 @@ export const connectToNotionHandler = async ({
 }: Input<CreateAccessTokenPayload> & { userId: string }) => {
   // get access token
   const accessTokenResponse = await fetch(
-    `https://${process.env.BOOKMARKED_API_URL}/notion/generate-access-token`,
-    { method: "POST", body: JSON.stringify(input) },
+    `${process.env.BOOKMARKED_API_URL}/notion/generate-access-token`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(input),
+    },
   );
-  const accessTokenData = await accessTokenResponse.json();
-  const accessTokenValid = createAccessTokenResponse.safeParse(accessTokenData);
 
-  console.log({ input, accessTokenData, accessTokenValid });
-
-  if (!accessTokenValid.success) {
-    // TODO handle error
-    return console.error(accessTokenValid.error);
-  }
+  const accessTokenData = await validateResponse(
+    accessTokenResponse,
+    createAccessTokenResponse,
+  );
 
   // get databaseId
   const databaseResponse = await fetch(
-    `https://${process.env.BOOKMARKED_API_URL}/notion/database`,
+    `${process.env.BOOKMARKED_API_URL}/notion/database`,
     {
       method: "GET",
-      headers: { "access-token": accessTokenValid.data.access_token },
+      headers: {
+        "Content-Type": "application/json",
+        "access-token": accessTokenData.access_token,
+      },
     },
   );
-  const databaseData = await databaseResponse.json();
-  const databaseValid = databaseIdResponse.safeParse(databaseData);
-
-  if (!databaseValid.success) {
-    return console.error(databaseValid.error);
-  }
+  const databaseData = await validateResponse(
+    databaseResponse,
+    getDatabaseIdResponse,
+  );
 
   // save token & notion database id
   await db.insert(notion).values({
     userId,
-    accessToken: accessTokenValid.data.access_token,
-    databaseId: databaseValid.data.id,
+    accessToken: accessTokenData.access_token,
+    databaseId: databaseData.id,
   });
 
   return { status: "success" };
