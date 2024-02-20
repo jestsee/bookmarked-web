@@ -1,5 +1,7 @@
 import { object, string, TypeOf } from "zod";
 
+import { Input } from "@/types/server";
+
 export const createAccessTokenPayload = object({
   code: string({ required_error: "Code is required" }).min(
     1,
@@ -20,3 +22,7 @@ export type CreateAccessTokenResponse = TypeOf<
   typeof createAccessTokenResponse
 >;
 export type DatabaseIdResponse = TypeOf<typeof getDatabaseIdResponse>;
+
+export type ConnectToNotionPayload = Input<CreateAccessTokenPayload> & {
+  userId: string;
+};

@@ -52,11 +52,12 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ### Features
 
-- [ ] Integrate with notion (button)
+- [x] Integrate with notion (button)
+- [x] Connect to notion status
 - [ ] Notion template to clone
 - [ ] Bookmark tweet to notion
-- [ ] Handle condition where's the user doesn't have any database
-- [ ] Check if the database have every needed property
+- [ ] Handle condition where's the user doesn't have any notion database
+- [ ] Check if the notion database has every needed property
 - [ ] Handle expired notion's access token
 
 ### Pages

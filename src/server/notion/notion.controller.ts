@@ -1,10 +1,11 @@
+import { eq, getTableColumns } from "drizzle-orm";
+
 import db from "@/database/client";
 import { notion } from "@/database/schema";
 import { validateResponse } from "@/lib/validation";
-import { Input } from "@/types/server";
 
 import {
-  CreateAccessTokenPayload,
+  ConnectToNotionPayload,
   createAccessTokenResponse,
   getDatabaseIdResponse,
 } from "./notion.schema";
@@ -12,25 +13,20 @@ import {
 export const connectToNotionHandler = async ({
   input,
   userId,
-}: Input<CreateAccessTokenPayload> & { userId: string }) => {
-  // get access token
+}: ConnectToNotionPayload) => {
   const accessTokenResponse = await fetch(
     `${process.env.BOOKMARKED_API_URL}/notion/generate-access-token`,
     {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(input),
     },
   );
-
   const accessTokenData = await validateResponse(
     accessTokenResponse,
     createAccessTokenResponse,
   );
 
-  // get databaseId
   const databaseResponse = await fetch(
     `${process.env.BOOKMARKED_API_URL}/notion/database`,
     {
@@ -46,7 +42,6 @@ export const connectToNotionHandler = async ({
     getDatabaseIdResponse,
   );
 
-  // save token & notion database id
   await db.insert(notion).values({
     userId,
     accessToken: accessTokenData.access_token,
@@ -54,4 +49,16 @@ export const connectToNotionHandler = async ({
   });
 
   return { status: "success" };
+};
+
+export const notionStatusHandler = async (userId: string) => {
+  const { userId: notionUserId, ...restColumns } = getTableColumns(notion);
+
+  const [notionData] = await db
+    .select(restColumns)
+    .from(notion)
+    .where(eq(notionUserId, userId))
+    .limit(1);
+
+  return notionData;
 };
