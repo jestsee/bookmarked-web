@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,15 +15,24 @@ const BookmarkForm = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<BookmarkPayload>({
     resolver: zodResolver(bookmarkPayload),
   });
 
-  const { mutate, isPending } = trpc.bookmarkTweet.useMutation();
+  const { mutateAsync, isPending, error } = trpc.bookmarkTweet.useMutation();
 
   const onSubmit = handleSubmit((values) => {
-    console.log(values);
-    mutate(values);
+    toast.promise(mutateAsync(values), {
+      loading: "It may take a while, please wait...",
+      success({ message }) {
+        reset();
+        return message;
+      },
+      error() {
+        return error?.message;
+      },
+    });
   });
 
   return (
