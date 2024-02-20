@@ -5,15 +5,22 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { trpc } from "@/trpc-client/trpc";
 
-const NotionStatus = () => {
-  const { data, isPending } = trpc.getNotionStatus.useQuery();
+import BookmarkForm from "./bookmark-form";
+
+const NotionContainer = () => {
+  const { data, isPending } = trpc.getNotionData.useQuery();
   const connected = !!(data?.accessToken && data.databaseId);
 
   if (isPending) return <p>Loading...</p>;
 
   return (
     <div>
-      <p>{connected && "Connected to Notion ✅"}</p>
+      {connected && (
+        <div>
+          <p>Connected to Notion ✅</p>
+          <BookmarkForm />
+        </div>
+      )}
       {!connected && (
         <Button asChild>
           <Link href={process.env.NEXT_PUBLIC_NOTION_AUTHORIZATION_URL}>
@@ -25,4 +32,4 @@ const NotionStatus = () => {
   );
 };
 
-export default NotionStatus;
+export default NotionContainer;
