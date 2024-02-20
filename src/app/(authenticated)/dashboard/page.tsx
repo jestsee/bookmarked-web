@@ -1,10 +1,10 @@
-import NotionStatus from "./notion-status";
+import NotionContainer from "./notion-container";
 
 const Dashboard = () => {
   return (
     <div>
       <h3>dashboard</h3>
-      <NotionStatus />
+      <NotionContainer />
     </div>
   );
 };
