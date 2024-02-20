@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { ReactNode, useEffect } from "react";
+import { ReactNode, Suspense, useEffect } from "react";
 
 import { ExclamationCircle } from "@/components/icons";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -61,4 +61,12 @@ const Redirect = () => {
   return _proceedRedirect({ code });
 };
 
-export default Redirect;
+const RedirectPage = () => {
+  return (
+    <Suspense>
+      <Redirect />
+    </Suspense>
+  );
+};
+
+export default RedirectPage;
