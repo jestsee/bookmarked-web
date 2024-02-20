@@ -50,11 +50,13 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - [x] Sign up error alert
 - [x] Authenticated user can't access sign up or sign in page
 
-### Features
+### TODO
 
 - [x] Integrate with notion (button)
 - [x] Connect to notion status
 - [x] Bookmark tweet to notion
+- [ ] Google authentication provider
+- [ ] Deploy to vercel
 - [ ] Notion template to clone
 - [ ] Handle condition where's the user doesn't have any notion database
 - [ ] Check if the notion database has every needed property
