@@ -6,7 +6,7 @@ import db from "@/database/client";
 
 import credentialsProvider from "./credentials-provider";
 
-export const authOptions: NextAuthOptions = {
+const authOptions: NextAuthOptions = {
   session: { strategy: "jwt" },
   adapter: DrizzleAdapter(db) as NextAuthOptions["adapter"],
   providers: [
