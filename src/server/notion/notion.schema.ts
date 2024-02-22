@@ -1,46 +1,61 @@
-import { object, string, TypeOf } from "zod";
+import { z } from "zod";
 
 import { Input } from "@/types/server";
 
-export const createAccessTokenPayload = object({
-  code: string({ required_error: "Code is required" }).min(
-    1,
-    "Code is required",
-  ),
+export const createAccessTokenPayload = z.object({
+  code: z
+    .string({ required_error: "Code is required" })
+    .min(1, "Code is required"),
 });
 
-export const createAccessTokenResponse = object({
-  access_token: string(),
+export const createAccessTokenResponse = z.object({
+  access_token: z.string(),
 });
 
-export const getDatabaseIdResponse = object({
-  id: string(),
+export const getDatabaseIdResponse = z.object({
+  id: z.string(),
 });
 
-export const bookmarkPayload = object({
-  url: string().url(),
+export const bookmarkPayload = z.object({
+  url: z.string().url(),
 });
 
-export const bookmarkResponse = object({
-  id: string(),
+export const bookmarkResponse = z.object({
+  id: z.string(),
+});
+
+export const getBookmarkStatusPayload = bookmarkResponse;
+
+export const getBookmarkStatusResponse = z.object({
+  status: z.enum(["not_found", "completed", "on_progress", "failed"]),
 });
 
 export type User = {
   userId: string;
 };
 
-export type CreateAccessTokenPayload = TypeOf<typeof createAccessTokenPayload>;
+export type CreateAccessTokenPayload = z.TypeOf<
+  typeof createAccessTokenPayload
+>;
 
-export type CreateAccessTokenResponse = TypeOf<
+export type CreateAccessTokenResponse = z.TypeOf<
   typeof createAccessTokenResponse
 >;
 
-export type DatabaseIdResponse = TypeOf<typeof getDatabaseIdResponse>;
+export type DatabaseIdResponse = z.TypeOf<typeof getDatabaseIdResponse>;
 
 export type ConnectToNotionPayload = Input<CreateAccessTokenPayload> & User;
 
-export type BookmarkPayload = TypeOf<typeof bookmarkPayload>;
+export type BookmarkPayload = z.TypeOf<typeof bookmarkPayload>;
 
 export type BookmarkTweetPayload = Input<BookmarkPayload> & User;
 
-export type BookmarkResponse = TypeOf<typeof bookmarkResponse>;
+export type BookmarkResponse = z.TypeOf<typeof bookmarkResponse>;
+
+export type GetBookmarkStatusPayload = z.TypeOf<
+  typeof getBookmarkStatusPayload
+>;
+
+export type GetBookmarkStatusResponse = z.TypeOf<
+  typeof getBookmarkStatusResponse
+>;

@@ -10,6 +10,8 @@ import {
   BookmarkTweetPayload,
   ConnectToNotionPayload,
   createAccessTokenResponse,
+  GetBookmarkStatusPayload,
+  getBookmarkStatusResponse,
   getDatabaseIdResponse,
 } from "./notion.schema";
 
@@ -97,4 +99,19 @@ export const bookmarkTweetHandler = async ({
   const responseData = await validateResponse(response, bookmarkResponse);
 
   return { status: "success", ...responseData };
+};
+
+export const getBookmarkStatusHandler = async ({
+  id,
+}: GetBookmarkStatusPayload) => {
+  const response = await fetch(
+    `${process.env.BOOKMARKED_API_URL}/notion/bookmark-tweet/${id}/progress`,
+    { method: "GET", headers: HEADERS },
+  );
+  const responseData = await validateResponse(
+    response,
+    getBookmarkStatusResponse,
+  );
+
+  return responseData;
 };

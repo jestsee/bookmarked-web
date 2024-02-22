@@ -1,10 +1,10 @@
-import NotionContainer from "./notion-container";
+import BookmarkContainer from "./bookmark-container";
 
 const Dashboard = () => {
   return (
     <div>
       <h3>dashboard</h3>
-      <NotionContainer />
+      <BookmarkContainer />
     </div>
   );
 };

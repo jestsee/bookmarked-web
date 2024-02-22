@@ -3,9 +3,14 @@ import { protectedProcedure, t } from "@/app/api/trpc/trpc.server";
 import {
   bookmarkTweetHandler,
   connectToNotionHandler,
+  getBookmarkStatusHandler,
   getNotionDataHandler,
 } from "./notion.controller";
-import { bookmarkPayload, createAccessTokenPayload } from "./notion.schema";
+import {
+  bookmarkPayload,
+  createAccessTokenPayload,
+  getBookmarkStatusPayload,
+} from "./notion.schema";
 
 const notionRouter = t.router({
   connectToNotion: protectedProcedure
@@ -21,6 +26,9 @@ const notionRouter = t.router({
     .mutation(({ input, ctx }) =>
       bookmarkTweetHandler({ input, userId: ctx.user?.id! }),
     ),
+  getBookmarkStatus: protectedProcedure
+    .input(getBookmarkStatusPayload)
+    .query(({ input }) => getBookmarkStatusHandler(input)),
 });
 
 export default notionRouter;
