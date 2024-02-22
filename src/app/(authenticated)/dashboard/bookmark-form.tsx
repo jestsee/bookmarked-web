@@ -25,9 +25,9 @@ const BookmarkForm = () => {
   const onSubmit = handleSubmit((values) => {
     toast.promise(mutateAsync(values), {
       loading: "It may take a while, please wait...",
-      success({ message }) {
+      success(response) {
         reset();
-        return message;
+        return JSON.stringify(response);
       },
       error() {
         return error?.message;
