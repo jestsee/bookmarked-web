@@ -10,7 +10,11 @@ import {
 } from "@/server/notion/notion.schema";
 import { trpc } from "@/trpc-client/trpc";
 
-const BookmarkForm = () => {
+interface Props {
+  addBookmarkId: (url: string) => void;
+}
+
+const BookmarkForm = ({ addBookmarkId }: Props) => {
   const {
     register,
     handleSubmit,
@@ -27,6 +31,7 @@ const BookmarkForm = () => {
       loading: "It may take a while, please wait...",
       success(response) {
         reset();
+        addBookmarkId(response.id);
         return JSON.stringify(response);
       },
       error() {
