@@ -32,5 +32,5 @@ export default async function middleware(
 
 // ignore docs
 export const config = {
-  matcher: ["/((?!docs).*)"],
+  matcher: ["/((?!docs|api).*)"],
 };

@@ -22,7 +22,7 @@ export const bookmarkPayload = object({
 });
 
 export const bookmarkResponse = object({
-  message: string(),
+  id: string(),
 });
 
 export type User = {
