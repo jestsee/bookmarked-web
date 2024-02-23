@@ -55,8 +55,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - [x] Integrate with notion (button)
 - [x] Connect to notion status
 - [x] Bookmark tweet to notion
+- [x] Deploy to vercel
 - [ ] Google authentication provider
-- [ ] Deploy to vercel
 - [ ] Notion template to clone
 - [ ] Handle condition where's the user doesn't have any notion database
 - [ ] Check if the notion database has every needed property
@@ -75,3 +75,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ### UI
 
 - [ ] display integration status with notion `(connected/not-connected)`
+- [ ] rewrite the authentication page
