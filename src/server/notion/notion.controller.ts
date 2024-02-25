@@ -71,7 +71,7 @@ export const getNotionDataHandler = async (userId: string) => {
 };
 
 export const bookmarkTweetHandler = async ({
-  input: { url },
+  input: { url, type = "thread" },
   userId,
 }: BookmarkTweetPayload) => {
   const { accessToken, databaseId } = await getNotionDataHandler(userId);
@@ -83,7 +83,7 @@ export const bookmarkTweetHandler = async ({
     });
   }
 
-  const body = { databaseId, url, type: "thread" }; // TODO hardcoded type
+  const body = { databaseId, url, type };
 
   const response = await fetch(
     `${process.env.BOOKMARKED_API_URL}/notion/bookmark-tweet`,
