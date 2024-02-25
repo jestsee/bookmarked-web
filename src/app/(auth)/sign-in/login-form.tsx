@@ -2,8 +2,8 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
+import { TRPCError } from "@trpc/server";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 
@@ -25,15 +25,22 @@ interface Props {
 }
 
 const LoginForm = ({ providers }: Props) => {
-  const searchParams = useSearchParams();
   const form = useForm<LoginUserInput>({
     resolver: zodResolver(loginUserSchema),
   });
-  const { mutate, isPending } = useMutation({
-    mutationFn: (input: LoginUserInput) => signIn("credentials", input),
+  const { mutate, isPending, error } = useMutation({
+    mutationFn: async (input: LoginUserInput) => {
+      const response = await signIn("credentials", {
+        ...input,
+        redirect: false,
+      });
+
+      if (!response?.ok && response?.error) {
+        throw new TRPCError({ code: "UNAUTHORIZED", message: response?.error });
+      }
+    },
   });
 
-  const error = searchParams.get("error");
   const { handleSubmit } = form;
   const onSubmit = handleSubmit((values) => mutate(values));
 
@@ -41,7 +48,7 @@ const LoginForm = ({ providers }: Props) => {
     <div>
       <Form {...form}>
         <form {...{ onSubmit }}>
-          {error && <CustomAlert message={error} />}
+          {error && <CustomAlert message={error.message} />}
           {fieldConfigs.map((fieldConfig) => (
             <CustomForm key={fieldConfig.name} {...{ form, ...fieldConfig }} />
           ))}
