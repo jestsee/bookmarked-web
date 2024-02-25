@@ -11,7 +11,7 @@ const credentialsProvider = CredentialsProvider({
     email: { label: "Email", type: "email" },
     password: { label: "Password", type: "password" },
   },
-  async authorize(credentials, request) {
+  async authorize(credentials) {
     if (!credentials?.email || !credentials.password) return null;
 
     const { emailVerified, ...restColumns } = getTableColumns(users);
@@ -20,9 +20,10 @@ const credentialsProvider = CredentialsProvider({
       .select(restColumns)
       .from(users)
       .where(eq(users.email, credentials.email));
-    const { password: hashedPassword, ...userWithoutPassword } = user;
 
     if (!user) return null;
+
+    const { password: hashedPassword, ...userWithoutPassword } = user;
 
     const isPasswordMatch = await bcrypt.compare(
       credentials.password,
@@ -30,8 +31,6 @@ const credentialsProvider = CredentialsProvider({
     );
 
     if (!isPasswordMatch) return null;
-
-    // TODO need to do something so the trpc server aware that the user already logged in
 
     return userWithoutPassword;
   },

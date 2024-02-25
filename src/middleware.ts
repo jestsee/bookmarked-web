@@ -2,7 +2,7 @@ import { NextFetchEvent, NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 import { NextRequestWithAuth, withAuth } from "next-auth/middleware";
 
-const nonAuthRoutes = ["sign-up", "api/auth/signin"];
+const nonAuthRoutes = ["sign-up", "sign-in"];
 
 export default async function middleware(
   req: NextRequest,
