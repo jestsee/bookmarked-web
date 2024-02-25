@@ -7,7 +7,7 @@ import db from "@/database/client";
 
 import credentialsProvider from "./credentials-provider";
 
-const authOptions: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
   session: { strategy: "jwt" },
   adapter: DrizzleAdapter(db) as NextAuthOptions["adapter"],
   pages: {
@@ -24,6 +24,14 @@ const authOptions: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
+  callbacks: {
+    session({ session, token }) {
+      if (session.user && token.sub) {
+        session.user.id = token.sub;
+      }
+      return session;
+    },
+  },
 };
 
 const handler = NextAuth(authOptions);
