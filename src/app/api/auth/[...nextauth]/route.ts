@@ -10,6 +10,9 @@ import credentialsProvider from "./credentials-provider";
 const authOptions: NextAuthOptions = {
   session: { strategy: "jwt" },
   adapter: DrizzleAdapter(db) as NextAuthOptions["adapter"],
+  pages: {
+    signIn: "/sign-in",
+  },
   providers: [
     credentialsProvider,
     GithubProvider({
