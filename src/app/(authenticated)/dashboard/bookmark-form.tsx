@@ -4,6 +4,8 @@ import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   BookmarkPayload,
   bookmarkPayload,
@@ -28,7 +30,7 @@ const BookmarkForm = ({ addBookmarkId }: Props) => {
 
   const onSubmit = handleSubmit((values) => {
     toast.promise(mutateAsync(values), {
-      loading: "It may take a while, please wait...",
+      loading: "Please wait...",
       success(response) {
         reset();
         addBookmarkId(response.id);
@@ -47,6 +49,16 @@ const BookmarkForm = ({ addBookmarkId }: Props) => {
     >
       <div className="flex">
         <Input type="url" placeholder="Twitter URL" {...register("url")} />
+        <RadioGroup defaultValue="option-one">
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="option-one" id="option-one" />
+            <Label htmlFor="option-one">Option One</Label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="option-two" id="option-two" />
+            <Label htmlFor="option-two">Option Two</Label>
+          </div>
+        </RadioGroup>
         <Button loading={isPending} type="submit">
           Bookmark
         </Button>

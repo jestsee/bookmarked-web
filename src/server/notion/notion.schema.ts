@@ -18,6 +18,7 @@ export const getDatabaseIdResponse = z.object({
 
 export const bookmarkPayload = z.object({
   url: z.string().url(),
+  type: z.enum(["tweet", "thread"]).default("thread"),
 });
 
 export const bookmarkResponse = z.object({
