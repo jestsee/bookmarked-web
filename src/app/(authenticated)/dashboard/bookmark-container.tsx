@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { trpc } from "@/trpc-client/trpc";
 
 import BookmarkForm from "./bookmark-form";
 import BookmarkItem from "./bookmark-item";
