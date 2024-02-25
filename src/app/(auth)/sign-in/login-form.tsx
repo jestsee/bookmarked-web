@@ -27,7 +27,8 @@ const LoginForm = ({ providers }: Props) => {
     resolver: zodResolver(loginUserSchema),
   });
   const { mutate, isPending } = useMutation({
-    mutationFn: (input: LoginUserInput) => signIn("credentials", input),
+    mutationFn: (input: LoginUserInput) =>
+      signIn("credentials", { ...input, callbackUrl: "/" }),
   });
 
   const { handleSubmit } = form;
