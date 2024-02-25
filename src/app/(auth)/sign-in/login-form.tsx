@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 
@@ -10,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { LoginUserInput, loginUserSchema } from "@/server/auth/auth.schema";
 
+import CustomAlert from "../custom-alert";
 import CustomForm from "../custom-form";
 import { AuthProviders, FieldConfig } from "../type";
 
@@ -23,6 +25,7 @@ interface Props {
 }
 
 const LoginForm = ({ providers }: Props) => {
+  const searchParams = useSearchParams();
   const form = useForm<LoginUserInput>({
     resolver: zodResolver(loginUserSchema),
   });
@@ -31,6 +34,7 @@ const LoginForm = ({ providers }: Props) => {
       signIn("credentials", { ...input, callbackUrl: "/" }),
   });
 
+  const error = searchParams.get("error");
   const { handleSubmit } = form;
   const onSubmit = handleSubmit((values) => mutate(values));
 
@@ -38,6 +42,7 @@ const LoginForm = ({ providers }: Props) => {
     <div>
       <Form {...form}>
         <form {...{ onSubmit }}>
+          {error && <CustomAlert message={error} />}
           {fieldConfigs.map((fieldConfig) => (
             <CustomForm key={fieldConfig.name} {...{ form, ...fieldConfig }} />
           ))}

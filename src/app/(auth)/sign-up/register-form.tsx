@@ -5,13 +5,12 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import { ExclamationCircle } from "@/components/icons";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { CreateUserInput, createUserSchema } from "@/server/auth/auth.schema";
 import { trpc } from "@/trpc-client/trpc";
 
+import CustomAlert from "../custom-alert";
 import CustomForm from "../custom-form";
 import { FieldConfig } from "../type";
 
@@ -21,16 +20,6 @@ const fieldConfigs: FieldConfig<CreateUserInput>[] = [
   { name: "password", label: "Password", isPassword: true },
   { name: "passwordConfirm", label: "Confirm password", isPassword: true },
 ];
-
-const _renderErrorAlert = (message: string) => {
-  return (
-    <Alert variant="destructive">
-      <ExclamationCircle />
-      <AlertTitle>Error</AlertTitle>
-      <AlertDescription>{message}</AlertDescription>
-    </Alert>
-  );
-};
 
 const RegisterForm = () => {
   const form = useForm<CreateUserInput>({
@@ -48,7 +37,7 @@ const RegisterForm = () => {
   return (
     <Form {...form}>
       <form {...{ onSubmit }} className="w-[400px] space-y-4">
-        {error && _renderErrorAlert(error.message)}
+        {error && <CustomAlert message={error.message} />}
         {fieldConfigs.map((fieldConfig) => (
           <CustomForm key={fieldConfig.name} {...{ form, ...fieldConfig }} />
         ))}
