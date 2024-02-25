@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth";
 
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "../auth/[...nextauth]/auth-options";
 
 // alternative: using getToken; cons: need to pass req:NextRequest
 // references: https://create.t3.gg/en/usage/next-auth, https://next-auth.js.org/configuration/nextjs#getserversession
