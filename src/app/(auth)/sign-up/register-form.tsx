@@ -1,58 +1,26 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 import { ExclamationCircle } from "@/components/icons";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import InputPassword from "@/components/ui/input-password";
+import { Form } from "@/components/ui/form";
 import { CreateUserInput, createUserSchema } from "@/server/auth/auth.schema";
 import { trpc } from "@/trpc-client/trpc";
 
-import { FieldConfig, RenderFormProps } from "./type";
+import CustomForm from "../custom-form";
+import { FieldConfig } from "../type";
 
-const fieldConfigs: FieldConfig[] = [
+const fieldConfigs: FieldConfig<CreateUserInput>[] = [
   { name: "name", label: "Name", placeholder: "John Doe" },
   { name: "email", label: "Email", placeholder: "example@gmail.com" },
   { name: "password", label: "Password", isPassword: true },
   { name: "passwordConfirm", label: "Confirm password", isPassword: true },
 ];
-
-const _renderForm = (props: RenderFormProps) => {
-  const { form, name, label, placeholder, isPassword } = props;
-  return (
-    <FormField
-      key={name}
-      defaultValue=""
-      control={form.control}
-      {...{ name }}
-      render={({ field }) => (
-        <FormItem>
-          <FormLabel>{label}</FormLabel>
-          <FormControl>
-            {!isPassword ? (
-              <Input {...field} {...{ placeholder }} />
-            ) : (
-              <InputPassword {...field} />
-            )}
-          </FormControl>
-          <FormMessage />
-        </FormItem>
-      )}
-    />
-  );
-};
 
 const _renderErrorAlert = (message: string) => {
   return (
@@ -81,9 +49,12 @@ const RegisterForm = () => {
     <Form {...form}>
       <form {...{ onSubmit }} className="w-[400px] space-y-4">
         {error && _renderErrorAlert(error.message)}
-        {fieldConfigs.map((fieldConfig) =>
-          _renderForm({ form, ...fieldConfig }),
-        )}
+        {fieldConfigs.map((fieldConfig) => (
+          <CustomForm key={fieldConfig.name} {...{ form, ...fieldConfig }} />
+        ))}
+        <p>
+          Already have an account? <Link href="/sign-in">Sign in</Link>
+        </p>
         <Button loading={isPending}>Sign up</Button>
       </form>
     </Form>

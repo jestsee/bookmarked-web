@@ -1,8 +1,8 @@
-import { Layout } from "@/types";
+import { LayoutProps } from "@/types";
 
 import Navbar from "./_navbar";
 
-const AuthenticatedLayout = ({ children }: Layout) => {
+const AuthenticatedLayout = ({ children }: LayoutProps) => {
   return (
     <main>
       <Navbar />
