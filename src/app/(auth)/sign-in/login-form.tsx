@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { TRPCError } from "@trpc/server";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 
@@ -27,17 +28,26 @@ interface Props {
 const LoginForm = ({ providers }: Props) => {
   const form = useForm<LoginUserInput>({
     resolver: zodResolver(loginUserSchema),
+    defaultValues: { email: "", password: "" },
   });
+
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl") ?? "/dashboard";
+
   const { mutate, isPending, error } = useMutation({
     mutationFn: async (input: LoginUserInput) => {
       const response = await signIn("credentials", {
         ...input,
         redirect: false,
+        callbackUrl: "/dashboard",
       });
 
       if (!response?.ok && response?.error) {
         throw new TRPCError({ code: "UNAUTHORIZED", message: response?.error });
       }
+
+      router.push(callbackUrl);
     },
   });
 

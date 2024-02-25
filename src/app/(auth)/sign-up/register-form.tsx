@@ -24,6 +24,7 @@ const fieldConfigs: FieldConfig<CreateUserInput>[] = [
 const RegisterForm = () => {
   const form = useForm<CreateUserInput>({
     resolver: zodResolver(createUserSchema),
+    defaultValues: { email: "", name: "", password: "", passwordConfirm: "" },
   });
   const { handleSubmit } = form;
   const { mutate, error, isPending } = trpc.registerUser.useMutation({
