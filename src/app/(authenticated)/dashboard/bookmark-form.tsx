@@ -24,6 +24,7 @@ const BookmarkForm = ({ addBookmarkId }: Props) => {
     reset,
   } = useForm<BookmarkPayload>({
     resolver: zodResolver(bookmarkPayload),
+    defaultValues: { type: "thread" },
   });
 
   const { mutateAsync, isPending, error } = trpc.bookmarkTweet.useMutation();
@@ -43,20 +44,17 @@ const BookmarkForm = ({ addBookmarkId }: Props) => {
   });
 
   return (
-    <form
-      {...{ onSubmit }}
-      className="flex w-full max-w-sm items-center space-x-2"
-    >
-      <div className="flex">
+    <form {...{ onSubmit }}>
+      <div className="space-y-4">
         <Input type="url" placeholder="Twitter URL" {...register("url")} />
-        <RadioGroup defaultValue="option-one">
+        <RadioGroup defaultValue="thread" {...register("type")}>
           <div className="flex items-center space-x-2">
-            <RadioGroupItem value="option-one" id="option-one" />
-            <Label htmlFor="option-one">Option One</Label>
+            <RadioGroupItem value="tweet" id="tweet" />
+            <Label htmlFor="tweet">Tweet</Label>
           </div>
           <div className="flex items-center space-x-2">
-            <RadioGroupItem value="option-two" id="option-two" />
-            <Label htmlFor="option-two">Option Two</Label>
+            <RadioGroupItem value="thread" id="thread" />
+            <Label htmlFor="thread">Thread</Label>
           </div>
         </RadioGroup>
         <Button loading={isPending} type="submit">
