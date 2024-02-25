@@ -1,9 +1,17 @@
-import { inferAsyncReturnType } from "@trpc/server";
-import { NextRequest } from "next/server";
+import { getServerSession } from "next-auth";
 
-import { deserializeUser } from "../../../server/auth/auth.middleware";
+import { authOptions } from "../auth/[...nextauth]/auth-options";
 
-export const createContext = async (request: NextRequest) =>
-  deserializeUser(request);
+// alternative: using getToken; cons: need to pass req:NextRequest
+// references: https://create.t3.gg/en/usage/next-auth, https://next-auth.js.org/configuration/nextjs#getserversession
+const deserializeUser = async () => {
+  const session = await getServerSession(authOptions);
 
-export type Context = inferAsyncReturnType<typeof createContext>;
+  if (!session?.user) return { user: null };
+
+  return { user: session?.user };
+};
+
+export const createContext = async () => deserializeUser();
+
+export type Context = Awaited<ReturnType<typeof createContext>>;
