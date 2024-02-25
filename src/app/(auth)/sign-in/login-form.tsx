@@ -11,14 +11,18 @@ import { Form } from "@/components/ui/form";
 import { LoginUserInput, loginUserSchema } from "@/server/auth/auth.schema";
 
 import CustomForm from "../custom-form";
-import { FieldConfig } from "../type";
+import { AuthProviders, FieldConfig } from "../type";
 
 const fieldConfigs: FieldConfig<LoginUserInput>[] = [
   { name: "email", label: "Email" },
   { name: "password", label: "Password", isPassword: true },
 ];
 
-const LoginForm = () => {
+interface Props {
+  providers: AuthProviders;
+}
+
+const LoginForm = ({ providers }: Props) => {
   const form = useForm<LoginUserInput>({
     resolver: zodResolver(loginUserSchema),
   });
@@ -42,6 +46,16 @@ const LoginForm = () => {
           <Button loading={isPending}>Sign in</Button>
         </form>
       </Form>
+      {Object.values(providers ?? []).map(
+        (provider) =>
+          provider.id !== "credentials" && (
+            <div key={provider.name}>
+              <button onClick={() => signIn(provider.id)}>
+                Sign in with {provider.name}
+              </button>
+            </div>
+          ),
+      )}
     </div>
   );
 };
