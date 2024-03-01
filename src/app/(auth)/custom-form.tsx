@@ -18,7 +18,7 @@ const CustomForm = <T extends FormInput>(props: RenderFormProps<T>) => {
       {...{ name }}
       render={({ field }) => (
         <FormItem>
-          {/* <FormLabel>{label}</FormLabel> */}
+          <FormLabel>{label}</FormLabel>
           <FormControl>
             {!isPassword ? (
               <Input {...field} {...{ placeholder }} />
