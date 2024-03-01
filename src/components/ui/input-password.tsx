@@ -12,12 +12,13 @@ const InputPassword = React.forwardRef<HTMLInputElement, InputProps>(
       <div className="relative">
         <Input ref={ref} {...props} type={!toggleValue ? "password" : "text"} />
         <button
+          tabIndex={-1}
           type="button"
-          className="absolute bottom-0 right-4 top-0 my-auto"
+          className="absolute bottom-0 right-4 top-0 my-auto text-[1.5rem]"
           onClick={() => toggle()}
         >
-          {!toggleValue && <Eye className="text-[1.5rem]" />}
-          {toggleValue && <EyeOff className="text-[1.5rem]" />}
+          {!toggleValue && <Eye />}
+          {toggleValue && <EyeOff />}
         </button>
       </div>
     );
