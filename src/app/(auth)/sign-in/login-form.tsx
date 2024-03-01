@@ -9,6 +9,14 @@ import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Form } from "@/components/ui/form";
 import { LoginUserInput, loginUserSchema } from "@/server/auth/auth.schema";
 
@@ -55,30 +63,43 @@ const LoginForm = ({ providers }: Props) => {
   const onSubmit = handleSubmit((values) => mutate(values));
 
   return (
-    <div>
-      <Form {...form}>
-        <form {...{ onSubmit }}>
-          {error && <CustomAlert message={error.message} />}
-          {fieldConfigs.map((fieldConfig) => (
-            <CustomForm key={fieldConfig.name} {...{ form, ...fieldConfig }} />
-          ))}
-          <p>
-            Already have an account? <Link href="/sign-up">Sign up</Link>
-          </p>
-          <Button loading={isPending}>Sign in</Button>
-        </form>
-      </Form>
-      {Object.values(providers ?? []).map(
-        (provider) =>
-          provider.id !== "credentials" && (
-            <div key={provider.name}>
-              <button onClick={() => signIn(provider.id)}>
-                Sign in with {provider.name}
-              </button>
-            </div>
-          ),
-      )}
-    </div>
+    <Card className="mx-auto max-w-[480px]">
+      <CardHeader className="pb-4">
+        <CardTitle className="mb-2">Welcome Back</CardTitle>
+        <CardDescription>
+          Don&apos;t have an account yet?&nbsp;
+          <Link className="underline-offset-2 hover:underline" href="/sign-up">
+            <strong>Sign up</strong>
+          </Link>
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Form {...form}>
+          <form {...{ onSubmit }} className="space-y-4">
+            {error && <CustomAlert message={error.message} />}
+            {fieldConfigs.map((fieldConfig) => (
+              <CustomForm
+                key={fieldConfig.name}
+                {...{ form, ...fieldConfig }}
+              />
+            ))}
+            <Button loading={isPending}>Sign in</Button>
+          </form>
+        </Form>
+      </CardContent>
+      <CardFooter>
+        {Object.values(providers ?? []).map(
+          (provider) =>
+            provider.id !== "credentials" && (
+              <div key={provider.name}>
+                <button onClick={() => signIn(provider.id)}>
+                  Sign in with {provider.name}
+                </button>
+              </div>
+            ),
+        )}
+      </CardFooter>
+    </Card>
   );
 };
 
