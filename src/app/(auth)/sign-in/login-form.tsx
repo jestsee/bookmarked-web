@@ -18,16 +18,20 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Form } from "@/components/ui/form";
+import { Separator } from "@/components/ui/separator";
 import { LoginUserInput, loginUserSchema } from "@/server/auth/auth.schema";
 
 import CustomAlert from "../custom-alert";
 import CustomForm from "../custom-form";
 import { AuthProviders, FieldConfig } from "../type";
+import { AuthIcons } from "./auth-icons";
 
 const fieldConfigs: FieldConfig<LoginUserInput>[] = [
   { name: "email", label: "Email" },
   { name: "password", label: "Password", isPassword: true },
 ];
+
+const authIcons = [{}];
 
 interface Props {
   providers: AuthProviders;
@@ -63,19 +67,22 @@ const LoginForm = ({ providers }: Props) => {
   const onSubmit = handleSubmit((values) => mutate(values));
 
   return (
-    <Card className="mx-auto max-w-[480px]">
-      <CardHeader className="pb-4">
-        <CardTitle className="mb-2">Welcome Back</CardTitle>
+    <Card>
+      <CardHeader className="text-center">
+        <CardTitle className="mb-1 mt-4 font-bold">Welcome Back</CardTitle>
         <CardDescription>
           Don&apos;t have an account yet?&nbsp;
-          <Link className="underline-offset-2 hover:underline" href="/sign-up">
-            <strong>Sign up</strong>
+          <Link
+            className="font-semibold underline-offset-2 hover:underline"
+            href="/sign-up"
+          >
+            Sign up
           </Link>
         </CardDescription>
       </CardHeader>
       <CardContent>
         <Form {...form}>
-          <form {...{ onSubmit }} className="space-y-4">
+          <form {...{ onSubmit }} className="flex flex-col gap-y-4">
             {error && <CustomAlert message={error.message} />}
             {fieldConfigs.map((fieldConfig) => (
               <CustomForm
@@ -83,21 +90,32 @@ const LoginForm = ({ providers }: Props) => {
                 {...{ form, ...fieldConfig }}
               />
             ))}
-            <Button loading={isPending}>Sign in</Button>
+            <Button className="mt-4 w-full" loading={isPending}>
+              Sign in
+            </Button>
           </form>
         </Form>
       </CardContent>
-      <CardFooter>
-        {Object.values(providers ?? []).map(
-          (provider) =>
+      <Separator className="mb-2 gap-3">
+        <p className="text-sm uppercase">or</p>
+      </Separator>
+      <CardFooter className="space-x-3">
+        {Object.values(providers ?? []).map((provider) => {
+          const Icon =
+            AuthIcons[provider.id] ?? `Sign in with ${provider.name}`;
+          return (
             provider.id !== "credentials" && (
-              <div key={provider.name}>
-                <button onClick={() => signIn(provider.id)}>
-                  Sign in with {provider.name}
-                </button>
-              </div>
-            ),
-        )}
+              <Button
+                variant="outline"
+                className="w-full py-5"
+                key={provider.name}
+                onClick={() => signIn(provider.id)}
+              >
+                <Icon className="h-6 w-6" />
+              </Button>
+            )
+          );
+        })}
       </CardFooter>
     </Card>
   );
