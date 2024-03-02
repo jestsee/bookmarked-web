@@ -1,5 +1,5 @@
 import { getProviders } from "next-auth/react";
-import { ReactNode, Suspense } from "react";
+import { ReactNode } from "react";
 
 import {
   Card,
@@ -8,7 +8,7 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { LayoutProps } from "@/types";
+import { LayoutProps } from "@/types/component";
 
 import AuthProviderButton from "./components/auth-provider-button";
 
@@ -23,9 +23,7 @@ const AuthenticationLayout = async ({ children, header }: Props) => {
     <div className="flex h-screen items-center justify-center">
       <Card className="w-full sm:w-[420px]">
         <CardHeader className="text-center">{header}</CardHeader>
-        <CardContent>
-          <Suspense>{children}</Suspense>
-        </CardContent>
+        <CardContent>{children}</CardContent>
         <Separator className="mb-2 gap-3">
           <p className="text-sm uppercase">or</p>
         </Separator>

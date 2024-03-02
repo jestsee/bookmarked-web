@@ -3,13 +3,14 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { TRPCError } from "@trpc/server";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { LoginUserInput, loginUserSchema } from "@/server/auth/auth.schema";
+import { SearchParams } from "@/types/component";
 
 import CustomAlert from "../components/custom-alert";
 import CustomForm from "../components/custom-form";
@@ -20,29 +21,30 @@ const fieldConfigs: FieldConfig<LoginUserInput>[] = [
   { name: "password", label: "Password", isPassword: true },
 ];
 
-const LoginForm = () => {
+interface Props {
+  searchParams: SearchParams<"callbackUrl">;
+}
+
+const LoginForm = ({ searchParams }: Props) => {
   const form = useForm<LoginUserInput>({
     resolver: zodResolver(loginUserSchema),
     defaultValues: { email: "", password: "" },
   });
 
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") ?? "/dashboard";
 
   const { mutate, isPending, error } = useMutation({
     mutationFn: async (input: LoginUserInput) => {
       const response = await signIn("credentials", {
         ...input,
         redirect: false,
-        callbackUrl: "/dashboard",
       });
 
       if (!response?.ok && response?.error) {
         throw new TRPCError({ code: "UNAUTHORIZED", message: response?.error });
       }
 
-      router.push(callbackUrl);
+      router.push(searchParams.callbackUrl ?? "/dashboard");
     },
   });
 
