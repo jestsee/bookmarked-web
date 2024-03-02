@@ -6,6 +6,7 @@ import { TRPCError } from "@trpc/server";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 import { SimpleAlert } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
@@ -43,7 +44,9 @@ const LoginForm = ({ searchParams }: Props) => {
       if (!response?.ok && response?.error) {
         throw new TRPCError({ code: "UNAUTHORIZED", message: response?.error });
       }
-
+    },
+    onSuccess: () => {
+      toast.success("Successfully signed in");
       router.push(searchParams.callbackUrl ?? "/dashboard");
     },
   });

@@ -2,7 +2,6 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
 
 import { SimpleAlert } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
@@ -25,11 +24,11 @@ const RegisterForm = () => {
     resolver: zodResolver(createUserSchema),
     defaultValues: { email: "", name: "", password: "", passwordConfirm: "" },
   });
-  const { handleSubmit } = form;
+  const { handleSubmit, reset } = form;
   const { mutate, error, isSuccess, isPending } = trpc.registerUser.useMutation(
     {
       onSuccess() {
-        toast.success("Successfully signed up!");
+        reset();
       },
     },
   );
