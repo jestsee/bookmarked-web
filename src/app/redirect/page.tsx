@@ -9,7 +9,9 @@ interface Props {
 
 const Redirect = ({ searchParams: { code, error } }: Props) => {
   if (error) return <CustomError />;
+
   if (!code) return <p>The code does not exist</p>;
+
   return <ProceedRedirect {...{ code }} />;
 };
 

@@ -7,12 +7,12 @@ import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 
+import { SimpleAlert } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { LoginUserInput, loginUserSchema } from "@/server/auth/auth.schema";
 import { SearchParams } from "@/types/component";
 
-import CustomAlert from "../components/custom-alert";
 import CustomForm from "../components/custom-form";
 import { FieldConfig } from "../type";
 
@@ -54,7 +54,7 @@ const LoginForm = ({ searchParams }: Props) => {
   return (
     <Form {...form}>
       <form {...{ onSubmit }} className="flex flex-col gap-y-4">
-        {error && <CustomAlert message={error.message} />}
+        {error && <SimpleAlert variant="destructive" message={error.message} />}
         {fieldConfigs.map((fieldConfig) => (
           <CustomForm key={fieldConfig.name} {...{ form, ...fieldConfig }} />
         ))}
