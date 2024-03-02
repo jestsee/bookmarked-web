@@ -4,15 +4,23 @@
     "plugin:drizzle/recommended",
     "next/core-web-vitals",
     "next",
-    "prettier"
+    "prettier",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "project": "./tsconfig.json"
   },
-  "plugins": ["drizzle", "simple-import-sort"],
+  "plugins": [
+    "drizzle",
+    "simple-import-sort",
+    "@typescript-eslint"
+  ],
   "rules": {
     "simple-import-sort/imports": "error",
-    "simple-import-sort/exports": "error"
+    "simple-import-sort/exports": "error",
+    "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/no-non-null-asserted-optional-chain": "warn"
   }
 }

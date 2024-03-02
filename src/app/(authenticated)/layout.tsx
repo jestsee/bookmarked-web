@@ -1,4 +1,4 @@
-import { LayoutProps } from "@/types";
+import { LayoutProps } from "@/types/component";
 
 import Navbar from "./_navbar";
 
