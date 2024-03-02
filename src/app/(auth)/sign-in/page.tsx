@@ -5,7 +5,6 @@ import { useMutation } from "@tanstack/react-query";
 import { TRPCError } from "@trpc/server";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
-import { Suspense } from "react";
 import { useForm } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
@@ -51,19 +50,17 @@ const LoginForm = () => {
   const onSubmit = handleSubmit((values) => mutate(values));
 
   return (
-    <Suspense>
-      <Form {...form}>
-        <form {...{ onSubmit }} className="flex flex-col gap-y-4">
-          {error && <CustomAlert message={error.message} />}
-          {fieldConfigs.map((fieldConfig) => (
-            <CustomForm key={fieldConfig.name} {...{ form, ...fieldConfig }} />
-          ))}
-          <Button className="mt-4" loading={isPending}>
-            Sign in
-          </Button>
-        </form>
-      </Form>
-    </Suspense>
+    <Form {...form}>
+      <form {...{ onSubmit }} className="flex flex-col gap-y-4">
+        {error && <CustomAlert message={error.message} />}
+        {fieldConfigs.map((fieldConfig) => (
+          <CustomForm key={fieldConfig.name} {...{ form, ...fieldConfig }} />
+        ))}
+        <Button className="mt-4" loading={isPending}>
+          Sign in
+        </Button>
+      </form>
+    </Form>
   );
 };
 
