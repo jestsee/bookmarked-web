@@ -20,22 +20,24 @@ const AuthenticationLayout = async ({ children, header }: Props) => {
   const providers = await getProviders();
 
   return (
-    <Card className="absolute left-1/2 top-1/2 w-[420px] -translate-x-1/2 -translate-y-1/2">
-      <CardHeader className="text-center">{header}</CardHeader>
-      <CardContent>{children}</CardContent>
-      <Separator className="mb-2 gap-3">
-        <p className="text-sm uppercase">or</p>
-      </Separator>
-      <CardFooter className="space-x-3">
-        {Object.values(providers ?? []).map((provider) => {
-          return (
-            provider.id !== "credentials" && (
-              <AuthProviderButton key={provider.id} {...{ provider }} />
-            )
-          );
-        })}
-      </CardFooter>
-    </Card>
+    <div className="flex h-screen items-center justify-center">
+      <Card className="w-full sm:w-[420px]">
+        <CardHeader className="text-center">{header}</CardHeader>
+        <CardContent>{children}</CardContent>
+        <Separator className="mb-2 gap-3">
+          <p className="text-sm uppercase">or</p>
+        </Separator>
+        <CardFooter className="space-x-3">
+          {Object.values(providers ?? []).map((provider) => {
+            return (
+              provider.id !== "credentials" && (
+                <AuthProviderButton key={provider.id} {...{ provider }} />
+              )
+            );
+          })}
+        </CardFooter>
+      </Card>
+    </div>
   );
 };
 
