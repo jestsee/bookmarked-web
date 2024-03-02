@@ -3,6 +3,8 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
+import { CheckCircle, ExclamationCircle } from "../icons";
+
 const alertVariants = cva(
   "relative w-full rounded-lg border p-4 [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground",
   {
@@ -10,7 +12,9 @@ const alertVariants = cva(
       variant: {
         default: "bg-background text-foreground",
         destructive:
-          "border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive",
+          "bg-destructive/10 border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive",
+        success:
+          "bg-green-600/10 border-green-500/50 text-green-500 dark:border-green-500 [&>svg]:text-green-500",
       },
     },
     defaultVariants: {
@@ -56,4 +60,48 @@ const AlertDescription = React.forwardRef<
 ));
 AlertDescription.displayName = "AlertDescription";
 
-export { Alert, AlertDescription, AlertTitle };
+/**
+ * Custom alert component
+ */
+interface Props {
+  title?: string;
+  message: string;
+  prefixIcon?: React.ReactNode;
+}
+
+type Variant = Exclude<
+  VariantProps<typeof alertVariants>["variant"],
+  undefined | null
+>;
+
+const MAP_TITLE: Record<Variant, string> = {
+  default: "",
+  destructive: "Error",
+  success: "Success",
+};
+
+const MAP_ICON: Record<Variant, React.ReactNode> = {
+  default: <></>,
+  destructive: <ExclamationCircle className="h-[1.25rem] w-[1.25rem]" />,
+  success: <CheckCircle className="h-[1.25rem] w-[1.25rem]" />,
+};
+
+const SimpleAlert = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement> &
+    VariantProps<typeof alertVariants> &
+    Props
+>(({ message, title, prefixIcon, ...props }, ref) => {
+  const variant = props.variant ?? "default";
+
+  return (
+    <Alert ref={ref} {...props}>
+      {prefixIcon ?? MAP_ICON[variant]}
+      <AlertTitle>{title ?? MAP_TITLE[variant]}</AlertTitle>
+      <AlertDescription>{message}</AlertDescription>
+    </Alert>
+  );
+});
+SimpleAlert.displayName = "SimpleAlert";
+
+export { Alert, AlertDescription, AlertTitle, SimpleAlert };

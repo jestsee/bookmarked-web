@@ -1,5 +1,5 @@
 import bcrypt from "bcryptjs";
-import { eq, getTableColumns, sql } from "drizzle-orm";
+import { eq, getTableColumns } from "drizzle-orm";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 import db from "@/database/client";

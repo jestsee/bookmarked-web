@@ -8,7 +8,7 @@ import {
 import { Input } from "@/components/ui/input";
 import InputPassword from "@/components/ui/input-password";
 
-import { FormInput, RenderFormProps } from "./type";
+import { FormInput, RenderFormProps } from "../type";
 
 const CustomForm = <T extends FormInput>(props: RenderFormProps<T>) => {
   const { form, name, label, placeholder, isPassword } = props;
