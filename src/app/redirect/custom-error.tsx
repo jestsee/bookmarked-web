@@ -1,8 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-import { ExclamationCircle } from "@/components/icons";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { SimpleAlert } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 
 interface Props {
@@ -12,13 +11,10 @@ interface Props {
 const CustomError = ({ message }: Props) => {
   return (
     <>
-      <Alert variant="destructive">
-        <ExclamationCircle />
-        <AlertTitle>Error</AlertTitle>
-        <AlertDescription>
-          {message ?? "Failed to connect to Notion"}
-        </AlertDescription>
-      </Alert>
+      <SimpleAlert
+        variant="destructive"
+        message={message ?? "Failed to connect to Notion"}
+      />
       <Button asChild>
         <Link href={process.env.NEXT_PUBLIC_NOTION_AUTHORIZATION_URL}>
           Try again
