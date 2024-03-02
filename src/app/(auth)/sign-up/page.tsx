@@ -37,15 +37,14 @@ const RegisterForm = () => {
 
   return (
     <Form {...form}>
-      <form {...{ onSubmit }} className="flex flex-col gap-y-4">
+      <form {...{ onSubmit }} className="flex flex-col gap-y-2">
         {error && <CustomAlert message={error.message} />}
         {fieldConfigs.map((fieldConfig) => (
           <CustomForm key={fieldConfig.name} {...{ form, ...fieldConfig }} />
         ))}
-        <p>
-          Already have an account? <Link href="/sign-in">Sign in</Link>
-        </p>
-        <Button loading={isPending}>Sign up</Button>
+        <Button className="mt-2" loading={isPending}>
+          Sign up
+        </Button>
       </form>
     </Form>
   );
