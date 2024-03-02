@@ -37,7 +37,7 @@ const RegisterForm = () => {
 
   return (
     <Form {...form}>
-      <form {...{ onSubmit }} className="w-[400px] space-y-4">
+      <form {...{ onSubmit }} className="flex flex-col gap-y-4">
         {error && <CustomAlert message={error.message} />}
         {fieldConfigs.map((fieldConfig) => (
           <CustomForm key={fieldConfig.name} {...{ form, ...fieldConfig }} />
