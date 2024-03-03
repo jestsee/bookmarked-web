@@ -105,7 +105,7 @@ export const getBookmarkStatusHandler = async ({
   id,
 }: GetBookmarkStatusPayload) => {
   const response = await fetch(
-    `${process.env.BOOKMARKED_API_URL}/notion/bookmark-tweet/${id}/progress`,
+    `${process.env.BOOKMARKED_API_URL}/notion/bookmark-tweet/${id}/status`,
     { method: "GET", headers: HEADERS },
   );
   const responseData = await validateResponse(
