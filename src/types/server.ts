@@ -7,7 +7,7 @@ export type Input<T> = {
 export const serverErrorSchema = z.object({
   message: z.string().optional(),
   error: z.string().optional(),
-  statusCode: z.number(),
+  statusCode: z.number().optional(),
 });
 
 export type ServerError = z.TypeOf<typeof serverErrorSchema>;
