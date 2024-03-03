@@ -11,14 +11,11 @@ const BookmarkItem = ({ id }: Props) => {
     { id },
     {
       refetchInterval({ state }) {
-        if (
-          state.data?.status === "completed" ||
-          state.data?.status === "failed"
-        )
-          return false;
-        return 1000;
+        const stop = !!state.error || state.data?.status !== "on_progress";
+        return stop ? false : 4000;
       },
-      initialData: { status: "on_progress" },
+      // TODO type and url still hardcoded, should get proper payload as the initialData
+      initialData: { status: "on_progress", type: "tweet", url: "" },
     },
   );
 
