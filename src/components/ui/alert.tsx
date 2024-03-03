@@ -2,8 +2,9 @@ import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { Icon } from "@/types/component";
 
-import { CheckCircle, ExclamationCircle } from "../icons";
+import { CheckCircle, ExclamationCircle, ExclamationTriangle } from "../icons";
 
 const alertVariants = cva(
   "relative w-full rounded-lg border p-4 [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground",
@@ -15,6 +16,7 @@ const alertVariants = cva(
           "bg-destructive/10 border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive",
         success:
           "bg-green-600/10 border-green-500/50 text-green-500 dark:border-green-500 [&>svg]:text-green-500",
+        warn: "bg-amber-600/10 border-amber-500/50 text-amber-500 dark:border-amber-500 [&>svg]:text-amber-500",
       },
     },
     defaultVariants: {
@@ -74,16 +76,16 @@ type Variant = Exclude<
   undefined | null
 >;
 
-const MAP_TITLE: Record<Variant, string> = {
-  default: "",
+const MAP_TITLE: Partial<Record<Variant, string>> = {
   destructive: "Error",
   success: "Success",
+  warn: "Warning",
 };
 
-const MAP_ICON: Record<Variant, React.ReactNode> = {
-  default: <></>,
-  destructive: <ExclamationCircle className="h-[1.25rem] w-[1.25rem]" />,
-  success: <CheckCircle className="h-[1.25rem] w-[1.25rem]" />,
+const MAP_ICON: Partial<Record<Variant, Icon>> = {
+  destructive: ExclamationCircle,
+  success: CheckCircle,
+  warn: ExclamationTriangle,
 };
 
 const SimpleAlert = React.forwardRef<
@@ -93,10 +95,11 @@ const SimpleAlert = React.forwardRef<
     Props
 >(({ message, title, prefixIcon, ...props }, ref) => {
   const variant = props.variant ?? "default";
+  const Icon = MAP_ICON[variant];
 
   return (
     <Alert ref={ref} {...props}>
-      {prefixIcon ?? MAP_ICON[variant]}
+      {prefixIcon ?? (Icon && <Icon className="h-[1.25rem] w-[1.25rem]" />)}
       <AlertTitle>{title ?? MAP_TITLE[variant]}</AlertTitle>
       <AlertDescription>{message}</AlertDescription>
     </Alert>

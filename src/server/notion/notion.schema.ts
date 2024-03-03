@@ -28,7 +28,10 @@ export const bookmarkResponse = z.object({
 export const getBookmarkStatusPayload = bookmarkResponse;
 
 export const getBookmarkStatusResponse = z.object({
-  status: z.enum(["not_found", "completed", "on_progress", "failed"]),
+  status: z.enum(["completed", "on_progress", "failed"]),
+  type: z.enum(["tweet", "thread"]),
+  url: z.string(),
+  message: z.string().optional(),
 });
 
 export type User = {

@@ -1,5 +1,6 @@
 export { default as CheckCircle } from "./check-circle";
 export { default as ExclamationCircle } from "./exclamation-circle";
+export { default as ExclamationTriangle } from "./exclamation-triangle";
 export { default as Eye } from "./eye";
 export { default as EyeOff } from "./eye-off";
 export { default as Github } from "./github";
