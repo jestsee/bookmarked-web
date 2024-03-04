@@ -16,9 +16,11 @@ export const getDatabaseIdResponse = z.object({
   id: z.string(),
 });
 
+export const bookmarkTypeEnum = z.enum(["tweet", "thread"]);
+
 export const bookmarkPayload = z.object({
   url: z.string().url(),
-  type: z.enum(["tweet", "thread"]).default("thread"),
+  type: bookmarkTypeEnum.default("thread"),
 });
 
 export const bookmarkResponse = z.object({
@@ -29,7 +31,7 @@ export const getBookmarkStatusPayload = bookmarkResponse;
 
 export const getBookmarkStatusResponse = z.object({
   status: z.enum(["completed", "on_progress", "failed"]),
-  type: z.enum(["tweet", "thread"]),
+  type: bookmarkTypeEnum,
   url: z.string(),
   message: z.string().optional(),
 });
