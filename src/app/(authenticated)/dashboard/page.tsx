@@ -1,4 +1,7 @@
+import Link from "next/link";
+
 import { createAsyncCaller } from "@/app/api/trpc/trpc.router";
+import { Button } from "@/components/ui/button";
 
 import BookmarkContainer from "./bookmark-container";
 
@@ -8,10 +11,19 @@ const Dashboard = async () => {
 
   const isConnectedToNotion = !!(data?.accessToken && data.databaseId);
 
+  if (!isConnectedToNotion)
+    return (
+      <Button asChild>
+        <Link href={process.env.NEXT_PUBLIC_NOTION_AUTHORIZATION_URL}>
+          Connect to Notion
+        </Link>
+      </Button>
+    );
+
   return (
     <div>
       <h3>dashboard</h3>
-      <BookmarkContainer {...{ isConnectedToNotion }} />
+      <BookmarkContainer />
     </div>
   );
 };
