@@ -12,11 +12,13 @@ import {
 } from "@/server/notion/notion.schema";
 import { trpc } from "@/trpc-client/trpc";
 
+import { ProcessedBookmark } from "./type";
+
 interface Props {
-  addBookmarkId: (url: string) => void;
+  processBookmark: (item: ProcessedBookmark) => void;
 }
 
-const BookmarkForm = ({ addBookmarkId }: Props) => {
+const BookmarkForm = ({ processBookmark }: Props) => {
   const {
     register,
     handleSubmit,
@@ -34,7 +36,7 @@ const BookmarkForm = ({ addBookmarkId }: Props) => {
       loading: "Please wait...",
       success(response) {
         reset();
-        addBookmarkId(response.id);
+        processBookmark({ id: response.id, ...values });
         return JSON.stringify(response);
       },
       error() {
