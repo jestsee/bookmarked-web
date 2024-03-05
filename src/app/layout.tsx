@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 
 import Providers from "@/components/providers";
 import { Toaster } from "@/components/ui/sonner";
+import { cn } from "@/lib/utils";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`px-4 ${inter.className}`}>
+      <body className={cn("mx-auto max-w-3xl px-4", inter.className)}>
         <Providers>
           {children}
           <Toaster richColors position="top-right" />
