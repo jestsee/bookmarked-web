@@ -13,7 +13,10 @@ const SignOutWrapper = ({ children }: Props) => {
   return (
     <Slot
       onClick={() =>
-        toast.promise(signOut(), { loading: "Signing you out..." })
+        toast.promise(signOut(), {
+          loading: "Signing you out...",
+          position: "top-center",
+        })
       }
     >
       {children}
