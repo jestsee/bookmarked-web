@@ -15,7 +15,6 @@ const BookmarkContainer = () => {
 
   return (
     <div>
-      <p>Connected to Notion ✅</p>
       <BookmarkForm {...{ processBookmark: processBookmark }} />
       {processed.map((item) => (
         <BookmarkItem key={item.id} {...item} />

@@ -17,7 +17,5 @@ const isAuthenticated = t.middleware(({ next, ctx }) => {
   return next();
 });
 
-// TODO test to access protected routes when not yet authenticated
-
 export const publicProcedure = t.procedure;
 export const protectedProcedure = publicProcedure.use(isAuthenticated);

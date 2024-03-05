@@ -14,7 +14,6 @@ const BookmarkItem = ({ id, type, url }: Props) => {
         const stop = !!state.error || state.data?.status !== "on_progress";
         return stop ? false : 2000;
       },
-      // TODO type and url still hardcoded, should get proper payload as the initialData
       initialData: { status: "on_progress", type, url },
     },
   );
