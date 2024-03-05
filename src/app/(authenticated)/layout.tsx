@@ -1,10 +1,10 @@
 import { LayoutProps } from "@/types/component";
 
-import Navbar from "./_navbar";
+import Navbar from "./navbar";
 
 const AuthenticatedLayout = ({ children }: LayoutProps) => {
   return (
-    <main>
+    <main className="flex h-screen items-center justify-center">
       <Navbar />
       <div>{children}</div>
     </main>
