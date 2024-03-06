@@ -46,9 +46,19 @@ const BookmarkForm = ({ processBookmark }: Props) => {
   });
 
   return (
-    <form {...{ onSubmit }}>
+    <form className="mx-auto max-w-lg" {...{ onSubmit }}>
       <div className="space-y-4">
-        <Input type="url" placeholder="Twitter URL" {...register("url")} />
+        <div className="flex w-full gap-2">
+          <Input
+            className="rounded-l-3xl px-6 py-4"
+            type="url"
+            placeholder="Paste the tweet URL here"
+            {...register("url")}
+          />
+          <Button className="rounded-r-3xl" loading={isPending} type="submit">
+            Bookmark
+          </Button>
+        </div>
         <RadioGroup defaultValue="thread" {...register("type")}>
           <div className="flex items-center space-x-2">
             <RadioGroupItem value="tweet" id="tweet" />
@@ -59,9 +69,6 @@ const BookmarkForm = ({ processBookmark }: Props) => {
             <Label htmlFor="thread">Thread</Label>
           </div>
         </RadioGroup>
-        <Button loading={isPending} type="submit">
-          Bookmark
-        </Button>
       </div>
       {errors.url && <p>{errors.url.message}</p>}
     </form>
