@@ -1,5 +1,4 @@
-import { LogOut } from "lucide-react";
-
+import { Logout } from "@/components/icons";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 
@@ -13,7 +12,7 @@ interface Props {
 const UserInfo = ({ user }: Props) => {
   const name = user.name ?? "there";
   return (
-    <nav className="group absolute right-0 top-8 flex w-fit items-center gap-3 rounded-full border-2 border-primary-foreground bg-background p-2">
+    <nav className="group sticky top-8 ml-auto flex w-fit items-center gap-3 rounded-full border-2 border-primary-foreground bg-background p-2">
       <div className="hidden pl-3 text-left group-hover:block">
         <p className="text-sm font-semibold">Hi, {name}</p>
         {/* TODO still hardcoded */}
@@ -28,7 +27,7 @@ const UserInfo = ({ user }: Props) => {
           className="h-fit rounded-full p-3 hover:bg-destructive"
           variant="ghost"
         >
-          <LogOut size="1rem" className="aspect-square" />
+          <Logout className="h-4 w-4" />
         </Button>
       </SignOutWrapper>
     </nav>

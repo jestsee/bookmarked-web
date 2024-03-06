@@ -58,6 +58,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - [x] Deploy to vercel
 - [x] Google authentication provider
 - [ ] Twitter authentication provider
+- [ ] Validate tweet url
 - [ ] Notion template to clone
 - [ ] Handle condition when the user doesn't have any notion database
 - [ ] Check if the notion database has every needed property

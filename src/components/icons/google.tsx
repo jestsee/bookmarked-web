@@ -1,6 +1,6 @@
 import { SVGProps } from "react";
 
-export default function Google(props: SVGProps<SVGSVGElement>) {
+export function Google(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       width="1em"

@@ -30,7 +30,9 @@ const Dashboard = async () => {
 
   return (
     <div>
-      <h3>dashboard</h3>
+      <h1 className="mb-8 text-center text-6xl font-bold text-emerald-500">
+        Bookmark tweets <br /> but in Notion.
+      </h1>
       <BookmarkContainer />
     </div>
   );
