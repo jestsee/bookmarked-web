@@ -24,10 +24,10 @@ const UserInfo = ({ user }: Props) => {
       </Avatar>
       <SignOutWrapper>
         <Button
-          className="h-fit rounded-full p-3 hover:bg-destructive"
+          className="h-fit rounded-full py-3 pl-2 pr-3 hover:bg-destructive"
           variant="ghost"
         >
-          <Logout className="h-4 w-4" />
+          <Logout className="h-4 w-5" />
         </Button>
       </SignOutWrapper>
     </nav>

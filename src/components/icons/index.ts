@@ -1,4 +1,4 @@
-export * from "./bookmark-filled";
+export * from "./bookmark";
 export * from "./check-circle";
 export * from "./exclamation-circle";
 export * from "./exclamation-triangle";

@@ -52,6 +52,8 @@ export type DatabaseIdResponse = z.TypeOf<typeof getDatabaseIdResponse>;
 
 export type ConnectToNotionPayload = Input<CreateAccessTokenPayload> & User;
 
+export type BookmarkType = z.TypeOf<typeof bookmarkTypeEnum>;
+
 export type BookmarkPayload = z.TypeOf<typeof bookmarkPayload>;
 
 export type BookmarkTweetPayload = Input<BookmarkPayload> & User;

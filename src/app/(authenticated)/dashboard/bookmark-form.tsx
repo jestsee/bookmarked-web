@@ -2,13 +2,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
+import { Bookmark } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import {
   BookmarkPayload,
   bookmarkPayload,
+  BookmarkType,
 } from "@/server/notion/notion.schema";
 import { trpc } from "@/trpc-client/trpc";
 
@@ -19,14 +20,16 @@ interface Props {
 }
 
 const BookmarkForm = ({ processBookmark }: Props) => {
+  const DEFAULT_TYPE = "thread";
   const {
     register,
+    setValue,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm<BookmarkPayload>({
     resolver: zodResolver(bookmarkPayload),
-    defaultValues: { type: "thread" },
+    defaultValues: { type: DEFAULT_TYPE },
   });
 
   const { mutateAsync, isPending, error } = trpc.bookmarkTweet.useMutation();
@@ -55,20 +58,26 @@ const BookmarkForm = ({ processBookmark }: Props) => {
             placeholder="Paste the tweet URL here"
             {...register("url")}
           />
-          <Button className="rounded-r-3xl" loading={isPending} type="submit">
-            Bookmark
+          <Button
+            className="space-x-1.5 rounded-r-3xl pl-5 pr-6"
+            loading={isPending}
+            type="submit"
+          >
+            <Bookmark className="h-5 w-5" />
+            <span className="font-semibold">Bookmark</span>
           </Button>
         </div>
-        <RadioGroup defaultValue="thread" {...register("type")}>
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="tweet" id="tweet" />
-            <Label htmlFor="tweet">Tweet</Label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="thread" id="thread" />
-            <Label htmlFor="thread">Thread</Label>
-          </div>
-        </RadioGroup>
+        <ToggleGroup
+          variant="outline"
+          defaultValue={DEFAULT_TYPE}
+          type="single"
+          onValueChange={(value) => {
+            setValue("type", value as BookmarkType);
+          }}
+        >
+          <ToggleGroupItem value="tweet">Tweet</ToggleGroupItem>
+          <ToggleGroupItem value="thread">Thread</ToggleGroupItem>
+        </ToggleGroup>
       </div>
       {errors.url && <p>{errors.url.message}</p>}
     </form>
