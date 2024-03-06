@@ -30,9 +30,14 @@ const Dashboard = async () => {
 
   return (
     <div>
-      <h1 className="mb-8 text-center text-6xl font-bold text-emerald-500">
-        Bookmark tweets <br /> but in Notion.
-      </h1>
+      <div className="mb-10 space-y-8 text-center">
+        <h1 className="text-2xl font-bold text-emerald-500 sm:text-6xl">
+          Bookmark tweets <br /> but in Notion.
+        </h1>
+        <h3 className="max-sm:text-sm">
+          Track your bookmark status below and retry when it is failed
+        </h3>
+      </div>
       <BookmarkContainer />
     </div>
   );
