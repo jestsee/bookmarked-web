@@ -1,5 +1,9 @@
 "use client";
 
+import Link from "next/link";
+
+import { Loading, OpenInNew } from "@/components/icons";
+import { Button } from "@/components/ui/button";
 import { trpc } from "@/trpc-client/trpc";
 
 import { ProcessedBookmark } from "./type";
@@ -19,10 +23,18 @@ const BookmarkItem = ({ id, type, url }: Props) => {
   );
 
   return (
-    <div>
-      <p>Status: {data.status}</p>
-      <p>Type: {data.type}</p>
-      <p>Url: {data.url}</p>
+    <div className="flex w-full items-center rounded-lg border-2 border-primary-foreground">
+      <div className="px-4 py-2">
+        <p>Type: {data.type}</p>
+      </div>
+      <div className="ml-auto p-1">
+        <Button asChild variant="link">
+          <Link href={data.url} rel="noopener noreferrer" target="_blank">
+            <OpenInNew className="h-5 w-5 text-emerald-400" />
+          </Link>
+        </Button>
+      </div>
+      {/* <p>Status: {data.status}</p> */}
     </div>
   );
 };

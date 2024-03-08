@@ -40,7 +40,7 @@ const BookmarkForm = ({ processBookmark }: Props) => {
       success(response) {
         reset();
         processBookmark({ id: response.id, ...values });
-        return JSON.stringify(response);
+        return "Track your bookmark status below";
       },
       error() {
         return error?.message;
@@ -64,10 +64,11 @@ const BookmarkForm = ({ processBookmark }: Props) => {
             type="submit"
           >
             <Bookmark className="h-5 w-5" />
-            <span className="font-semibold">Bookmark</span>
+            <span className="hidden font-semibold sm:block">Bookmark</span>
           </Button>
         </div>
         <ToggleGroup
+          className="gap-0"
           variant="outline"
           defaultValue={DEFAULT_TYPE}
           type="single"
@@ -75,8 +76,12 @@ const BookmarkForm = ({ processBookmark }: Props) => {
             setValue("type", value as BookmarkType);
           }}
         >
-          <ToggleGroupItem value="tweet">Tweet</ToggleGroupItem>
-          <ToggleGroupItem value="thread">Thread</ToggleGroupItem>
+          <ToggleGroupItem className="rounded-r-none px-4" value="tweet">
+            Tweet
+          </ToggleGroupItem>
+          <ToggleGroupItem className="rounded-l-none px-4" value="thread">
+            Thread
+          </ToggleGroupItem>
         </ToggleGroup>
       </div>
       {errors.url && <p>{errors.url.message}</p>}
