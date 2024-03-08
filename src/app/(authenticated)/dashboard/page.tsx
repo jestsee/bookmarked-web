@@ -31,7 +31,7 @@ const Dashboard = async () => {
   return (
     <div>
       <div className="mb-10 space-y-8 text-center">
-        <h1 className="text-2xl font-bold text-emerald-500 sm:text-6xl">
+        <h1 className="text-4xl font-bold text-emerald-500 sm:text-6xl">
           Bookmark tweets <br /> but in Notion.
         </h1>
         <h3 className="max-sm:text-sm">

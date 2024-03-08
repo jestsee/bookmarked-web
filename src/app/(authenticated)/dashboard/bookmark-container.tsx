@@ -14,11 +14,22 @@ const BookmarkContainer = () => {
   };
 
   return (
-    <div>
-      <BookmarkForm {...{ processBookmark: processBookmark }} />
-      {processed.map((item) => (
-        <BookmarkItem key={item.id} {...item} />
-      ))}
+    <div className="space-y-12">
+      <BookmarkForm {...{ processBookmark }} />
+      {/* {processed.length > 0 && ( */}
+      {
+        <div className="space-y-3">
+          <p>Status</p>
+          <BookmarkItem
+            id="1"
+            type="thread"
+            url="https://ui.shadcn.com/docs/components/toggle-group#default"
+          />
+          {processed.map((item) => (
+            <BookmarkItem key={item.id} {...item} />
+          ))}
+        </div>
+      }
     </div>
   );
 };
