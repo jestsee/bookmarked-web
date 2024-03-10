@@ -35,7 +35,7 @@ const Dashboard = async () => {
           Bookmark tweets <br /> but in Notion.
         </h1>
         <h3 className="max-sm:text-sm">
-          Track your bookmark status below and retry when it is failed
+          Track your bookmark status below and retry when it&apos;s failed
         </h3>
       </div>
       <BookmarkContainer />

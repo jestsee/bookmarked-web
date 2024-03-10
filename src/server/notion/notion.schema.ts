@@ -29,8 +29,10 @@ export const bookmarkResponse = z.object({
 
 export const getBookmarkStatusPayload = bookmarkResponse;
 
+export const bookmarkStatus = z.enum(["completed", "on_progress", "failed"]);
+
 export const getBookmarkStatusResponse = z.object({
-  status: z.enum(["completed", "on_progress", "failed"]),
+  status: bookmarkStatus,
   type: bookmarkTypeEnum,
   url: z.string(),
   message: z.string().optional(),
@@ -59,6 +61,8 @@ export type BookmarkPayload = z.TypeOf<typeof bookmarkPayload>;
 export type BookmarkTweetPayload = Input<BookmarkPayload> & User;
 
 export type BookmarkResponse = z.TypeOf<typeof bookmarkResponse>;
+
+export type BookmarkStatus = z.TypeOf<typeof bookmarkStatus>;
 
 export type GetBookmarkStatusPayload = z.TypeOf<
   typeof getBookmarkStatusPayload
