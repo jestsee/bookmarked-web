@@ -15,7 +15,7 @@ const AuthenticatedLayout = async ({ children }: LayoutProps) => {
   return (
     <main>
       <UserInfo user={session.user} />
-      <div className="pt-32">{children}</div>
+      <div className="pb-16 pt-32">{children}</div>
     </main>
   );
 };

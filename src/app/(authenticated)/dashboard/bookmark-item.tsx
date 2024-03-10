@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 
-import { Loading, OpenInNew } from "@/components/icons";
+import { OpenInNew } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { trpc } from "@/trpc-client/trpc";
 
+import BookmarkStatusBadge from "./bookmark-status";
 import { ProcessedBookmark } from "./type";
 
 interface Props extends ProcessedBookmark {}
@@ -24,17 +25,19 @@ const BookmarkItem = ({ id, type, url }: Props) => {
 
   return (
     <div className="flex w-full items-center rounded-lg border-2 border-primary-foreground">
-      <div className="px-4 py-2">
-        <p>Type: {data.type}</p>
-      </div>
-      <div className="ml-auto p-1">
-        <Button asChild variant="link">
-          <Link href={data.url} rel="noopener noreferrer" target="_blank">
+      <div className="flex items-center py-1">
+        <Button
+          asChild
+          variant="link"
+          className="relative flex-col hover:after:absolute hover:after:bottom-2 hover:after:h-[1.15px] hover:after:w-4 hover:after:rounded-sm hover:after:bg-emerald-400 hover:after:content-['']"
+        >
+          <Link href={url} rel="noopener noreferrer" target="_blank">
             <OpenInNew className="h-5 w-5 text-emerald-400" />
           </Link>
         </Button>
+        <p className="capitalize">{type}</p>
       </div>
-      {/* <p>Status: {data.status}</p> */}
+      <BookmarkStatusBadge className="ml-auto mr-4" status={data.status} />
     </div>
   );
 };
