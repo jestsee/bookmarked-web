@@ -16,9 +16,11 @@ export const getDatabaseIdResponse = z.object({
   id: z.string(),
 });
 
+export const bookmarkTypeEnum = z.enum(["tweet", "thread"]);
+
 export const bookmarkPayload = z.object({
   url: z.string().url(),
-  type: z.enum(["tweet", "thread"]).default("thread"),
+  type: bookmarkTypeEnum.default("thread"),
 });
 
 export const bookmarkResponse = z.object({
@@ -27,11 +29,21 @@ export const bookmarkResponse = z.object({
 
 export const getBookmarkStatusPayload = bookmarkResponse;
 
+export const bookmarkStatus = z.enum(["completed", "on_progress", "failed"]);
+
 export const getBookmarkStatusResponse = z.object({
-  status: z.enum(["completed", "on_progress", "failed"]),
-  type: z.enum(["tweet", "thread"]),
+  status: bookmarkStatus,
+  type: bookmarkTypeEnum,
   url: z.string(),
   message: z.string().optional(),
+});
+
+export const retryBookmarkPayload = getBookmarkStatusPayload;
+
+export const retryBookmarkStatusResponse = z.object({
+  message: z.string(),
+  error: z.string().optional(),
+  statusCode: z.number().optional(),
 });
 
 export type User = {
@@ -50,11 +62,15 @@ export type DatabaseIdResponse = z.TypeOf<typeof getDatabaseIdResponse>;
 
 export type ConnectToNotionPayload = Input<CreateAccessTokenPayload> & User;
 
+export type BookmarkType = z.TypeOf<typeof bookmarkTypeEnum>;
+
 export type BookmarkPayload = z.TypeOf<typeof bookmarkPayload>;
 
 export type BookmarkTweetPayload = Input<BookmarkPayload> & User;
 
 export type BookmarkResponse = z.TypeOf<typeof bookmarkResponse>;
+
+export type BookmarkStatus = z.TypeOf<typeof bookmarkStatus>;
 
 export type GetBookmarkStatusPayload = z.TypeOf<
   typeof getBookmarkStatusPayload
@@ -63,3 +79,5 @@ export type GetBookmarkStatusPayload = z.TypeOf<
 export type GetBookmarkStatusResponse = z.TypeOf<
   typeof getBookmarkStatusResponse
 >;
+
+export type RetryBookmarkPayload = z.TypeOf<typeof retryBookmarkPayload>;

@@ -13,6 +13,8 @@ import {
   GetBookmarkStatusPayload,
   getBookmarkStatusResponse,
   getDatabaseIdResponse,
+  RetryBookmarkPayload,
+  retryBookmarkStatusResponse,
 } from "./notion.schema";
 
 const HEADERS = { "Content-Type": "application/json" };
@@ -111,6 +113,19 @@ export const getBookmarkStatusHandler = async ({
   const responseData = await validateResponse(
     response,
     getBookmarkStatusResponse,
+  );
+
+  return responseData;
+};
+
+export const retryBookmarkHandler = async ({ id }: RetryBookmarkPayload) => {
+  const response = await fetch(
+    `${process.env.BOOKMARKED_API_URL}/notion/bookmark-tweet/${id}/retry`,
+    { method: "PATCH", headers: HEADERS },
+  );
+  const responseData = await validateResponse(
+    response,
+    retryBookmarkStatusResponse,
   );
 
   return responseData;

@@ -2,29 +2,34 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
+import { Bookmark } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import {
   BookmarkPayload,
   bookmarkPayload,
+  BookmarkType,
 } from "@/server/notion/notion.schema";
 import { trpc } from "@/trpc-client/trpc";
 
+import { ProcessedBookmark } from "./type";
+
 interface Props {
-  addBookmarkId: (url: string) => void;
+  processBookmark: (item: ProcessedBookmark) => void;
 }
 
-const BookmarkForm = ({ addBookmarkId }: Props) => {
+const BookmarkForm = ({ processBookmark }: Props) => {
+  const DEFAULT_TYPE = "thread";
   const {
     register,
+    setValue,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm<BookmarkPayload>({
     resolver: zodResolver(bookmarkPayload),
-    defaultValues: { type: "thread" },
+    defaultValues: { type: DEFAULT_TYPE },
   });
 
   const { mutateAsync, isPending, error } = trpc.bookmarkTweet.useMutation();
@@ -34,8 +39,8 @@ const BookmarkForm = ({ addBookmarkId }: Props) => {
       loading: "Please wait...",
       success(response) {
         reset();
-        addBookmarkId(response.id);
-        return JSON.stringify(response);
+        processBookmark({ id: response.id, ...values });
+        return "Track your bookmark status below";
       },
       error() {
         return error?.message;
@@ -44,22 +49,40 @@ const BookmarkForm = ({ addBookmarkId }: Props) => {
   });
 
   return (
-    <form {...{ onSubmit }}>
+    <form className="mx-auto max-w-lg" {...{ onSubmit }}>
       <div className="space-y-4">
-        <Input type="url" placeholder="Twitter URL" {...register("url")} />
-        <RadioGroup defaultValue="thread" {...register("type")}>
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="tweet" id="tweet" />
-            <Label htmlFor="tweet">Tweet</Label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="thread" id="thread" />
-            <Label htmlFor="thread">Thread</Label>
-          </div>
-        </RadioGroup>
-        <Button loading={isPending} type="submit">
-          Bookmark
-        </Button>
+        <div className="flex w-full gap-2">
+          <Input
+            className="rounded-l-3xl px-6 py-4"
+            type="url"
+            placeholder="Paste the tweet URL here"
+            {...register("url")}
+          />
+          <Button
+            className="space-x-1.5 rounded-r-3xl pl-5 pr-6"
+            loading={isPending}
+            type="submit"
+          >
+            <Bookmark className="h-5 w-5" />
+            <span className="hidden font-semibold sm:block">Bookmark</span>
+          </Button>
+        </div>
+        <ToggleGroup
+          className="gap-0"
+          variant="outline"
+          defaultValue={DEFAULT_TYPE}
+          type="single"
+          onValueChange={(value) => {
+            setValue("type", value as BookmarkType);
+          }}
+        >
+          <ToggleGroupItem className="rounded-r-none px-4" value="tweet">
+            Tweet
+          </ToggleGroupItem>
+          <ToggleGroupItem className="rounded-l-none px-4" value="thread">
+            Thread
+          </ToggleGroupItem>
+        </ToggleGroup>
       </div>
       {errors.url && <p>{errors.url.message}</p>}
     </form>

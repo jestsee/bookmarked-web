@@ -5,10 +5,12 @@ specifiers:
   '@auth/drizzle-adapter': ^0.4.0
   '@hookform/resolvers': ^3.3.4
   '@neondatabase/serverless': ^0.7.2
+  '@radix-ui/react-avatar': ^1.0.4
   '@radix-ui/react-label': ^2.0.2
-  '@radix-ui/react-radio-group': ^1.1.3
   '@radix-ui/react-separator': ^1.0.3
   '@radix-ui/react-slot': ^1.0.2
+  '@radix-ui/react-toggle': ^1.0.3
+  '@radix-ui/react-toggle-group': ^1.0.4
   '@tanstack/react-query': ^5.18.1
   '@tanstack/react-query-devtools': ^5.18.1
   '@trpc/client': 11.0.0-next-beta.264
@@ -33,7 +35,6 @@ specifiers:
   eslint-config-prettier: ^9.1.0
   eslint-plugin-drizzle: ^0.2.3
   eslint-plugin-simple-import-sort: ^10.0.0
-  lucide-react: ^0.316.0
   next: 14.1.0
   next-auth: ^4.24.5
   next-themes: ^0.2.1
@@ -59,10 +60,12 @@ dependencies:
   '@auth/drizzle-adapter': registry.npmjs.org/@auth/drizzle-adapter/0.4.0
   '@hookform/resolvers': registry.npmjs.org/@hookform/resolvers/3.3.4_react-hook-form@7.50.1
   '@neondatabase/serverless': registry.npmjs.org/@neondatabase/serverless/0.7.2
+  '@radix-ui/react-avatar': registry.npmjs.org/@radix-ui/react-avatar/1.0.4_jq2v3mgqnxhjqzsfthu2a3rfwm
   '@radix-ui/react-label': registry.npmjs.org/@radix-ui/react-label/2.0.2_jq2v3mgqnxhjqzsfthu2a3rfwm
-  '@radix-ui/react-radio-group': registry.npmjs.org/@radix-ui/react-radio-group/1.1.3_jq2v3mgqnxhjqzsfthu2a3rfwm
   '@radix-ui/react-separator': registry.npmjs.org/@radix-ui/react-separator/1.0.3_jq2v3mgqnxhjqzsfthu2a3rfwm
   '@radix-ui/react-slot': registry.npmjs.org/@radix-ui/react-slot/1.0.2_eteh3so6nztr56vqc4nbg6qqla
+  '@radix-ui/react-toggle': registry.npmjs.org/@radix-ui/react-toggle/1.0.3_jq2v3mgqnxhjqzsfthu2a3rfwm
+  '@radix-ui/react-toggle-group': registry.npmjs.org/@radix-ui/react-toggle-group/1.0.4_jq2v3mgqnxhjqzsfthu2a3rfwm
   '@tanstack/react-query': registry.npmjs.org/@tanstack/react-query/5.20.5_react@18.2.0
   '@tanstack/react-query-devtools': registry.npmjs.org/@tanstack/react-query-devtools/5.20.5_nj6bklxtszvugmftkfdx6c64vy
   '@trpc/client': registry.npmjs.org/@trpc/client/11.0.0-next-beta.264_tmh346gat7v3tg6iuaunyjnv64
@@ -74,7 +77,6 @@ dependencies:
   drizzle-orm: registry.npmjs.org/drizzle-orm/0.29.3_tqwjf5dxtuguskthwzy7tuakki
   eslint-plugin-drizzle: registry.npmjs.org/eslint-plugin-drizzle/0.2.3_eslint@8.56.0
   eslint-plugin-simple-import-sort: registry.npmjs.org/eslint-plugin-simple-import-sort/10.0.0_eslint@8.56.0
-  lucide-react: registry.npmjs.org/lucide-react/0.316.0_react@18.2.0
   next: registry.npmjs.org/next/14.1.0_biqbaboplfbrettd7655fr4n2y
   next-auth: registry.npmjs.org/next-auth/4.24.5_hipqgvz32dfk24avoqah5l7veq
   next-themes: registry.npmjs.org/next-themes/0.2.1_hipqgvz32dfk24avoqah5l7veq
@@ -973,6 +975,33 @@ packages:
       '@babel/runtime': registry.npmjs.org/@babel/runtime/7.23.9
     dev: false
 
+  registry.npmjs.org/@radix-ui/react-avatar/1.0.4_jq2v3mgqnxhjqzsfthu2a3rfwm:
+    resolution: {integrity: sha512-kVK2K7ZD3wwj3qhle0ElXhOjbezIgyl2hVvgwfIdexL3rN6zJmy5AqqIf+D31lxVppdzV8CjAfZ6PklkmInZLw==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@radix-ui/react-avatar/-/react-avatar-1.0.4.tgz}
+    id: registry.npmjs.org/@radix-ui/react-avatar/1.0.4
+    name: '@radix-ui/react-avatar'
+    version: 1.0.4
+    peerDependencies:
+      '@types/react': '*'
+      '@types/react-dom': '*'
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+    dependencies:
+      '@babel/runtime': registry.npmjs.org/@babel/runtime/7.23.9
+      '@radix-ui/react-context': registry.npmjs.org/@radix-ui/react-context/1.0.1_eteh3so6nztr56vqc4nbg6qqla
+      '@radix-ui/react-primitive': registry.npmjs.org/@radix-ui/react-primitive/1.0.3_jq2v3mgqnxhjqzsfthu2a3rfwm
+      '@radix-ui/react-use-callback-ref': registry.npmjs.org/@radix-ui/react-use-callback-ref/1.0.1_eteh3so6nztr56vqc4nbg6qqla
+      '@radix-ui/react-use-layout-effect': registry.npmjs.org/@radix-ui/react-use-layout-effect/1.0.1_eteh3so6nztr56vqc4nbg6qqla
+      '@types/react': registry.npmjs.org/@types/react/18.2.55
+      '@types/react-dom': registry.npmjs.org/@types/react-dom/18.2.19
+      react: registry.npmjs.org/react/18.2.0
+      react-dom: registry.npmjs.org/react-dom/18.2.0_react@18.2.0
+    dev: false
+
   registry.npmjs.org/@radix-ui/react-collection/1.0.3_jq2v3mgqnxhjqzsfthu2a3rfwm:
     resolution: {integrity: sha512-3SzW+0PW7yBBoQlT8wNcGtaxaD0XSu0uLUFgrtHY08Acx05TaHaOmVLR73c0j/cqpDy53KBMO7s0dx2wmOIDIA==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@radix-ui/react-collection/-/react-collection-1.0.3.tgz}
     id: registry.npmjs.org/@radix-ui/react-collection/1.0.3
@@ -1093,31 +1122,6 @@ packages:
       react-dom: registry.npmjs.org/react-dom/18.2.0_react@18.2.0
     dev: false
 
-  registry.npmjs.org/@radix-ui/react-presence/1.0.1_jq2v3mgqnxhjqzsfthu2a3rfwm:
-    resolution: {integrity: sha512-UXLW4UAbIY5ZjcvzjfRFo5gxva8QirC9hF7wRE4U5gz+TP0DbRk+//qyuAQ1McDxBt1xNMBTaciFGvEmJvAZCg==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@radix-ui/react-presence/-/react-presence-1.0.1.tgz}
-    id: registry.npmjs.org/@radix-ui/react-presence/1.0.1
-    name: '@radix-ui/react-presence'
-    version: 1.0.1
-    peerDependencies:
-      '@types/react': '*'
-      '@types/react-dom': '*'
-      react: ^16.8 || ^17.0 || ^18.0
-      react-dom: ^16.8 || ^17.0 || ^18.0
-    peerDependenciesMeta:
-      '@types/react':
-        optional: true
-      '@types/react-dom':
-        optional: true
-    dependencies:
-      '@babel/runtime': registry.npmjs.org/@babel/runtime/7.23.9
-      '@radix-ui/react-compose-refs': registry.npmjs.org/@radix-ui/react-compose-refs/1.0.1_eteh3so6nztr56vqc4nbg6qqla
-      '@radix-ui/react-use-layout-effect': registry.npmjs.org/@radix-ui/react-use-layout-effect/1.0.1_eteh3so6nztr56vqc4nbg6qqla
-      '@types/react': registry.npmjs.org/@types/react/18.2.55
-      '@types/react-dom': registry.npmjs.org/@types/react-dom/18.2.19
-      react: registry.npmjs.org/react/18.2.0
-      react-dom: registry.npmjs.org/react-dom/18.2.0_react@18.2.0
-    dev: false
-
   registry.npmjs.org/@radix-ui/react-primitive/1.0.3_jq2v3mgqnxhjqzsfthu2a3rfwm:
     resolution: {integrity: sha512-yi58uVyoAcK/Nq1inRY56ZSjKypBNKTa/1mcL8qdl6oJeEaDbOldlzrGn7P6Q3Id5d+SYNGc5AJgc4vGhjs5+g==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@radix-ui/react-primitive/-/react-primitive-1.0.3.tgz}
     id: registry.npmjs.org/@radix-ui/react-primitive/1.0.3
@@ -1136,39 +1140,6 @@ packages:
     dependencies:
       '@babel/runtime': registry.npmjs.org/@babel/runtime/7.23.9
       '@radix-ui/react-slot': registry.npmjs.org/@radix-ui/react-slot/1.0.2_eteh3so6nztr56vqc4nbg6qqla
-      '@types/react': registry.npmjs.org/@types/react/18.2.55
-      '@types/react-dom': registry.npmjs.org/@types/react-dom/18.2.19
-      react: registry.npmjs.org/react/18.2.0
-      react-dom: registry.npmjs.org/react-dom/18.2.0_react@18.2.0
-    dev: false
-
-  registry.npmjs.org/@radix-ui/react-radio-group/1.1.3_jq2v3mgqnxhjqzsfthu2a3rfwm:
-    resolution: {integrity: sha512-x+yELayyefNeKeTx4fjK6j99Fs6c4qKm3aY38G3swQVTN6xMpsrbigC0uHs2L//g8q4qR7qOcww8430jJmi2ag==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@radix-ui/react-radio-group/-/react-radio-group-1.1.3.tgz}
-    id: registry.npmjs.org/@radix-ui/react-radio-group/1.1.3
-    name: '@radix-ui/react-radio-group'
-    version: 1.1.3
-    peerDependencies:
-      '@types/react': '*'
-      '@types/react-dom': '*'
-      react: ^16.8 || ^17.0 || ^18.0
-      react-dom: ^16.8 || ^17.0 || ^18.0
-    peerDependenciesMeta:
-      '@types/react':
-        optional: true
-      '@types/react-dom':
-        optional: true
-    dependencies:
-      '@babel/runtime': registry.npmjs.org/@babel/runtime/7.23.9
-      '@radix-ui/primitive': registry.npmjs.org/@radix-ui/primitive/1.0.1
-      '@radix-ui/react-compose-refs': registry.npmjs.org/@radix-ui/react-compose-refs/1.0.1_eteh3so6nztr56vqc4nbg6qqla
-      '@radix-ui/react-context': registry.npmjs.org/@radix-ui/react-context/1.0.1_eteh3so6nztr56vqc4nbg6qqla
-      '@radix-ui/react-direction': registry.npmjs.org/@radix-ui/react-direction/1.0.1_eteh3so6nztr56vqc4nbg6qqla
-      '@radix-ui/react-presence': registry.npmjs.org/@radix-ui/react-presence/1.0.1_jq2v3mgqnxhjqzsfthu2a3rfwm
-      '@radix-ui/react-primitive': registry.npmjs.org/@radix-ui/react-primitive/1.0.3_jq2v3mgqnxhjqzsfthu2a3rfwm
-      '@radix-ui/react-roving-focus': registry.npmjs.org/@radix-ui/react-roving-focus/1.0.4_jq2v3mgqnxhjqzsfthu2a3rfwm
-      '@radix-ui/react-use-controllable-state': registry.npmjs.org/@radix-ui/react-use-controllable-state/1.0.1_eteh3so6nztr56vqc4nbg6qqla
-      '@radix-ui/react-use-previous': registry.npmjs.org/@radix-ui/react-use-previous/1.0.1_eteh3so6nztr56vqc4nbg6qqla
-      '@radix-ui/react-use-size': registry.npmjs.org/@radix-ui/react-use-size/1.0.1_eteh3so6nztr56vqc4nbg6qqla
       '@types/react': registry.npmjs.org/@types/react/18.2.55
       '@types/react-dom': registry.npmjs.org/@types/react-dom/18.2.19
       react: registry.npmjs.org/react/18.2.0
@@ -1249,6 +1220,62 @@ packages:
       react: registry.npmjs.org/react/18.2.0
     dev: false
 
+  registry.npmjs.org/@radix-ui/react-toggle-group/1.0.4_jq2v3mgqnxhjqzsfthu2a3rfwm:
+    resolution: {integrity: sha512-Uaj/M/cMyiyT9Bx6fOZO0SAG4Cls0GptBWiBmBxofmDbNVnYYoyRWj/2M/6VCi/7qcXFWnHhRUfdfZFvvkuu8A==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@radix-ui/react-toggle-group/-/react-toggle-group-1.0.4.tgz}
+    id: registry.npmjs.org/@radix-ui/react-toggle-group/1.0.4
+    name: '@radix-ui/react-toggle-group'
+    version: 1.0.4
+    peerDependencies:
+      '@types/react': '*'
+      '@types/react-dom': '*'
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+    dependencies:
+      '@babel/runtime': registry.npmjs.org/@babel/runtime/7.23.9
+      '@radix-ui/primitive': registry.npmjs.org/@radix-ui/primitive/1.0.1
+      '@radix-ui/react-context': registry.npmjs.org/@radix-ui/react-context/1.0.1_eteh3so6nztr56vqc4nbg6qqla
+      '@radix-ui/react-direction': registry.npmjs.org/@radix-ui/react-direction/1.0.1_eteh3so6nztr56vqc4nbg6qqla
+      '@radix-ui/react-primitive': registry.npmjs.org/@radix-ui/react-primitive/1.0.3_jq2v3mgqnxhjqzsfthu2a3rfwm
+      '@radix-ui/react-roving-focus': registry.npmjs.org/@radix-ui/react-roving-focus/1.0.4_jq2v3mgqnxhjqzsfthu2a3rfwm
+      '@radix-ui/react-toggle': registry.npmjs.org/@radix-ui/react-toggle/1.0.3_jq2v3mgqnxhjqzsfthu2a3rfwm
+      '@radix-ui/react-use-controllable-state': registry.npmjs.org/@radix-ui/react-use-controllable-state/1.0.1_eteh3so6nztr56vqc4nbg6qqla
+      '@types/react': registry.npmjs.org/@types/react/18.2.55
+      '@types/react-dom': registry.npmjs.org/@types/react-dom/18.2.19
+      react: registry.npmjs.org/react/18.2.0
+      react-dom: registry.npmjs.org/react-dom/18.2.0_react@18.2.0
+    dev: false
+
+  registry.npmjs.org/@radix-ui/react-toggle/1.0.3_jq2v3mgqnxhjqzsfthu2a3rfwm:
+    resolution: {integrity: sha512-Pkqg3+Bc98ftZGsl60CLANXQBBQ4W3mTFS9EJvNxKMZ7magklKV69/id1mlAlOFDDfHvlCms0fx8fA4CMKDJHg==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@radix-ui/react-toggle/-/react-toggle-1.0.3.tgz}
+    id: registry.npmjs.org/@radix-ui/react-toggle/1.0.3
+    name: '@radix-ui/react-toggle'
+    version: 1.0.3
+    peerDependencies:
+      '@types/react': '*'
+      '@types/react-dom': '*'
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+    dependencies:
+      '@babel/runtime': registry.npmjs.org/@babel/runtime/7.23.9
+      '@radix-ui/primitive': registry.npmjs.org/@radix-ui/primitive/1.0.1
+      '@radix-ui/react-primitive': registry.npmjs.org/@radix-ui/react-primitive/1.0.3_jq2v3mgqnxhjqzsfthu2a3rfwm
+      '@radix-ui/react-use-controllable-state': registry.npmjs.org/@radix-ui/react-use-controllable-state/1.0.1_eteh3so6nztr56vqc4nbg6qqla
+      '@types/react': registry.npmjs.org/@types/react/18.2.55
+      '@types/react-dom': registry.npmjs.org/@types/react-dom/18.2.19
+      react: registry.npmjs.org/react/18.2.0
+      react-dom: registry.npmjs.org/react-dom/18.2.0_react@18.2.0
+    dev: false
+
   registry.npmjs.org/@radix-ui/react-use-callback-ref/1.0.1_eteh3so6nztr56vqc4nbg6qqla:
     resolution: {integrity: sha512-D94LjX4Sp0xJFVaoQOd3OO9k7tpBYNOXdVhkltUbGv2Qb9OXdrg/CpsjlZv7ia14Sylv398LswWBVVu5nqKzAQ==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@radix-ui/react-use-callback-ref/-/react-use-callback-ref-1.0.1.tgz}
     id: registry.npmjs.org/@radix-ui/react-use-callback-ref/1.0.1
@@ -1297,41 +1324,6 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': registry.npmjs.org/@babel/runtime/7.23.9
-      '@types/react': registry.npmjs.org/@types/react/18.2.55
-      react: registry.npmjs.org/react/18.2.0
-    dev: false
-
-  registry.npmjs.org/@radix-ui/react-use-previous/1.0.1_eteh3so6nztr56vqc4nbg6qqla:
-    resolution: {integrity: sha512-cV5La9DPwiQ7S0gf/0qiD6YgNqM5Fk97Kdrlc5yBcrF3jyEZQwm7vYFqMo4IfeHgJXsRaMvLABFtd0OVEmZhDw==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@radix-ui/react-use-previous/-/react-use-previous-1.0.1.tgz}
-    id: registry.npmjs.org/@radix-ui/react-use-previous/1.0.1
-    name: '@radix-ui/react-use-previous'
-    version: 1.0.1
-    peerDependencies:
-      '@types/react': '*'
-      react: ^16.8 || ^17.0 || ^18.0
-    peerDependenciesMeta:
-      '@types/react':
-        optional: true
-    dependencies:
-      '@babel/runtime': registry.npmjs.org/@babel/runtime/7.23.9
-      '@types/react': registry.npmjs.org/@types/react/18.2.55
-      react: registry.npmjs.org/react/18.2.0
-    dev: false
-
-  registry.npmjs.org/@radix-ui/react-use-size/1.0.1_eteh3so6nztr56vqc4nbg6qqla:
-    resolution: {integrity: sha512-ibay+VqrgcaI6veAojjofPATwledXiSmX+C0KrBk/xgpX9rBzPV3OsfwlhQdUOFbh+LKQorLYT+xTXW9V8yd0g==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@radix-ui/react-use-size/-/react-use-size-1.0.1.tgz}
-    id: registry.npmjs.org/@radix-ui/react-use-size/1.0.1
-    name: '@radix-ui/react-use-size'
-    version: 1.0.1
-    peerDependencies:
-      '@types/react': '*'
-      react: ^16.8 || ^17.0 || ^18.0
-    peerDependenciesMeta:
-      '@types/react':
-        optional: true
-    dependencies:
-      '@babel/runtime': registry.npmjs.org/@babel/runtime/7.23.9
-      '@radix-ui/react-use-layout-effect': registry.npmjs.org/@radix-ui/react-use-layout-effect/1.0.1_eteh3so6nztr56vqc4nbg6qqla
       '@types/react': registry.npmjs.org/@types/react/18.2.55
       react: registry.npmjs.org/react/18.2.0
     dev: false
@@ -3875,17 +3867,6 @@ packages:
     dependencies:
       es5-ext: registry.npmjs.org/es5-ext/0.10.62
     dev: true
-
-  registry.npmjs.org/lucide-react/0.316.0_react@18.2.0:
-    resolution: {integrity: sha512-dTmYX1H4IXsRfVcj/KUxworV6814ApTl7iXaS21AimK2RUEl4j4AfOmqD3VR8phe5V91m4vEJ8tCK4uT1jE5nA==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/lucide-react/-/lucide-react-0.316.0.tgz}
-    id: registry.npmjs.org/lucide-react/0.316.0
-    name: lucide-react
-    version: 0.316.0
-    peerDependencies:
-      react: ^16.5.1 || ^17.0.0 || ^18.0.0
-    dependencies:
-      react: registry.npmjs.org/react/18.2.0
-    dev: false
 
   registry.npmjs.org/memoizee/0.4.15:
     resolution: {integrity: sha512-UBWmJpLZd5STPm7PMUlOw/TSy972M+z8gcyQ5veOnSDRREz/0bmpyTfKt3/51DhEBqCZQn1udM/5flcSPYhkdQ==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/memoizee/-/memoizee-0.4.15.tgz}

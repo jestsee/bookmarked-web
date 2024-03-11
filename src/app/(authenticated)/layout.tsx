@@ -1,12 +1,21 @@
+import { redirect } from "next/navigation";
+import { getServerSession } from "next-auth";
+
 import { LayoutProps } from "@/types/component";
 
-import Navbar from "./_navbar";
+import UserInfo from "./components/user-info";
 
-const AuthenticatedLayout = ({ children }: LayoutProps) => {
+const AuthenticatedLayout = async ({ children }: LayoutProps) => {
+  const session = await getServerSession();
+
+  if (!session || !session.user) {
+    redirect("/sign-in");
+  }
+
   return (
     <main>
-      <Navbar />
-      <div>{children}</div>
+      <UserInfo user={session.user} />
+      <div className="pb-16 pt-32">{children}</div>
     </main>
   );
 };
