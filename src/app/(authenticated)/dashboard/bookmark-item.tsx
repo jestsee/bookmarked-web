@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { toast } from "sonner";
 
 import { OpenInNew } from "@/components/icons";
 import { Button } from "@/components/ui/button";
@@ -12,7 +13,7 @@ import { ProcessedBookmark } from "./type";
 interface Props extends ProcessedBookmark {}
 
 const BookmarkItem = ({ id, type, url }: Props) => {
-  const { data } = trpc.getBookmarkStatus.useQuery(
+  const { data, refetch: refetchStatus } = trpc.getBookmarkStatus.useQuery(
     { id },
     {
       refetchInterval({ state }) {
@@ -22,6 +23,20 @@ const BookmarkItem = ({ id, type, url }: Props) => {
       initialData: { status: "on_progress", type, url },
     },
   );
+
+  const { mutateAsync } = trpc.retryBookmark.useMutation({
+    onSuccess() {
+      refetchStatus();
+    },
+  });
+  const handleRetry = () => {
+    toast.promise(mutateAsync({ id }), {
+      loading: "Please wait...",
+      error(error) {
+        return error.message ?? "Something went wrong";
+      },
+    });
+  };
 
   return (
     <div className="flex w-full items-center rounded-lg border-2 border-primary-foreground">
@@ -35,9 +50,18 @@ const BookmarkItem = ({ id, type, url }: Props) => {
             <OpenInNew className="h-5 w-5 text-emerald-400" />
           </Link>
         </Button>
-        <p className="capitalize">{type}</p>
+        <div className="py-1">
+          <p className="capitalize">{type}</p>
+          {data.message && (
+            <p className="text-xs text-rose-700">{data.message}</p>
+          )}
+        </div>
       </div>
-      <BookmarkStatusBadge className="ml-auto mr-4" status={data.status} />
+      <BookmarkStatusBadge
+        className="ml-auto mr-4"
+        status={data.status}
+        onRetry={handleRetry}
+      />
     </div>
   );
 };

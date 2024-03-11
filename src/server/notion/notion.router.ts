@@ -5,11 +5,13 @@ import {
   connectToNotionHandler,
   getBookmarkStatusHandler,
   getNotionDataHandler,
+  retryBookmarkHandler,
 } from "./notion.controller";
 import {
   bookmarkPayload,
   createAccessTokenPayload,
   getBookmarkStatusPayload,
+  retryBookmarkPayload,
 } from "./notion.schema";
 
 const notionRouter = t.router({
@@ -29,6 +31,9 @@ const notionRouter = t.router({
   getBookmarkStatus: protectedProcedure
     .input(getBookmarkStatusPayload)
     .query(({ input }) => getBookmarkStatusHandler(input)),
+  retryBookmark: protectedProcedure
+    .input(retryBookmarkPayload)
+    .mutation(({ input }) => retryBookmarkHandler(input)),
 });
 
 export default notionRouter;

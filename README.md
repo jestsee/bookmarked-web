@@ -50,7 +50,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - [x] Sign up error alert
 - [x] Authenticated user can't access sign up or sign in page
 
-### TODO
+### Uncategorized
 
 - [x] Integrate with notion (button)
 - [x] Connect to notion status

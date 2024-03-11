@@ -38,6 +38,14 @@ export const getBookmarkStatusResponse = z.object({
   message: z.string().optional(),
 });
 
+export const retryBookmarkPayload = getBookmarkStatusPayload;
+
+export const retryBookmarkStatusResponse = z.object({
+  message: z.string(),
+  error: z.string().optional(),
+  statusCode: z.number().optional(),
+});
+
 export type User = {
   userId: string;
 };
@@ -71,3 +79,5 @@ export type GetBookmarkStatusPayload = z.TypeOf<
 export type GetBookmarkStatusResponse = z.TypeOf<
   typeof getBookmarkStatusResponse
 >;
+
+export type RetryBookmarkPayload = z.TypeOf<typeof retryBookmarkPayload>;
