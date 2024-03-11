@@ -51,21 +51,28 @@ const BookmarkForm = ({ processBookmark }: Props) => {
   return (
     <form className="mx-auto max-w-lg" {...{ onSubmit }}>
       <div className="space-y-4">
-        <div className="flex w-full gap-2">
-          <Input
-            className="rounded-l-3xl px-6 py-4"
-            type="url"
-            placeholder="Paste the tweet URL here"
-            {...register("url")}
-          />
-          <Button
-            className="space-x-1.5 rounded-r-3xl pl-5 pr-6"
-            loading={isPending}
-            type="submit"
-          >
-            <Bookmark className="h-5 w-5" />
-            <span className="hidden font-semibold sm:block">Bookmark</span>
-          </Button>
+        <div>
+          <div className="flex w-full gap-2">
+            <Input
+              className="rounded-l-3xl px-6 py-4"
+              type="url"
+              placeholder="Paste the tweet URL here"
+              {...register("url")}
+            />
+            <Button
+              className="space-x-1.5 rounded-r-3xl pl-5 pr-6"
+              loading={isPending}
+              type="submit"
+            >
+              <Bookmark className="h-5 w-5" />
+              <span className="hidden font-semibold sm:block">Bookmark</span>
+            </Button>
+          </div>
+          {errors.url && (
+            <p className="ml-4 mt-2 text-sm text-rose-700">
+              {errors.url.message}
+            </p>
+          )}
         </div>
         <ToggleGroup
           className="gap-0"
@@ -84,7 +91,6 @@ const BookmarkForm = ({ processBookmark }: Props) => {
           </ToggleGroupItem>
         </ToggleGroup>
       </div>
-      {errors.url && <p>{errors.url.message}</p>}
     </form>
   );
 };

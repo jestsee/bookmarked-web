@@ -5,7 +5,7 @@ export type Input<T> = {
 };
 
 export const serverErrorSchema = z.object({
-  message: z.string().optional(),
+  message: z.union([z.string(), z.string().array()]),
   error: z.string().optional(),
   statusCode: z.number().optional(),
 });
