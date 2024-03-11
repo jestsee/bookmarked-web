@@ -19,7 +19,16 @@ export const getDatabaseIdResponse = z.object({
 export const bookmarkTypeEnum = z.enum(["tweet", "thread"]);
 
 export const bookmarkPayload = z.object({
-  url: z.string().url(),
+  url: z
+    .string()
+    .url({ message: "Must be a valid tweet URL" })
+    .refine(
+      (url) => {
+        const validUrlRegex = /^(https?:\/\/)?(www\.)?(twitter|x)\.com\//;
+        return validUrlRegex.test(url);
+      },
+      { message: "Must be a valid tweet URL" },
+    ),
   type: bookmarkTypeEnum.default("thread"),
 });
 
@@ -41,7 +50,7 @@ export const getBookmarkStatusResponse = z.object({
 export const retryBookmarkPayload = getBookmarkStatusPayload;
 
 export const retryBookmarkStatusResponse = z.object({
-  message: z.string(),
+  message: z.union([z.string(), z.string().array()]),
   error: z.string().optional(),
   statusCode: z.number().optional(),
 });

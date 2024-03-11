@@ -1,7 +1,7 @@
 import { BuiltInProviderType } from "next-auth/providers/index";
 import { LiteralUnion } from "next-auth/react";
 
-import { Github, Google } from "@/components/icons";
+import { Github, Google, X } from "@/components/icons";
 import { Icon } from "@/types/component";
 
 export const AuthIcons: Partial<
@@ -9,4 +9,5 @@ export const AuthIcons: Partial<
 > = {
   github: Github,
   google: Google,
+  twitter: X,
 };

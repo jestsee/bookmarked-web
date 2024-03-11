@@ -16,7 +16,7 @@ const UserInfo = ({ user }: Props) => {
       <div className="hidden pl-3 text-left group-hover:block">
         <p className="text-sm font-semibold">Hi, {name}</p>
         {/* TODO still hardcoded */}
-        <p className="text-xs">Connected via Github</p>
+        <p className="text-xs">Connected to Notion</p>
       </div>
       <Avatar>
         {user.image && <AvatarImage src={user.image} />}
