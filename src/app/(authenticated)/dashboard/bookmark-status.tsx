@@ -14,8 +14,9 @@ const statusVariants = cva("rounded-md capitalize py-1", {
   variants: {
     status: {
       on_progress: "animate-pulse",
-      failed: "bg-rose-600/20 text-rose-400 cursor-pointer",
-      completed: "bg-emerald-600/30 text-emerald-500",
+      failed:
+        "bg-rose-600/20 text-rose-400 cursor-pointer hover:bg-rose-600/20",
+      completed: "bg-emerald-600/30 text-emerald-500 hover:bg-emerald-600/20",
     },
   },
   defaultVariants: {
@@ -25,11 +26,13 @@ const statusVariants = cva("rounded-md capitalize py-1", {
 
 interface Props extends VariantProps<typeof statusVariants> {
   className?: string;
+  onRetry: () => void;
 }
 
-const BookmarkStatusBadge = ({ className, status }: Props) => {
+const BookmarkStatusBadge = ({ className, status, onRetry }: Props) => {
   return (
     <Badge
+      onClick={status === "failed" ? onRetry : undefined}
       className={cn(statusVariants({ status }), className)}
       variant="secondary"
     >
