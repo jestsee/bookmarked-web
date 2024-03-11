@@ -13,7 +13,9 @@ export const validateResponse = async <T extends z.ZodRawShape>(
     const parsedError = serverErrorSchema.parse(data);
     throw new TRPCError({
       code: "BAD_REQUEST",
-      message: parsedError.message ?? "Something went wrong",
+      message: Array.isArray(parsedError.message)
+        ? parsedError.message[0]
+        : parsedError.message ?? "Something went wrong",
     });
   }
 
