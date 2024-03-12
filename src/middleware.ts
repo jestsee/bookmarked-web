@@ -12,9 +12,6 @@ export default async function middleware(
   const isAuthenticated = !!token;
   const { pathname } = req.nextUrl;
 
-  // landing page can be accessed by everyone
-  if (pathname === "/") return NextResponse.next();
-
   const isAccessingNonAuthRoutes = nonAuthRoutes.some((prefix) =>
     pathname.startsWith(`/${prefix}`),
   );
@@ -24,13 +21,12 @@ export default async function middleware(
   }
 
   if (isAuthenticated && isAccessingNonAuthRoutes) {
-    return NextResponse.redirect(new URL("/dashboard", req.url));
+    return NextResponse.redirect(new URL("/", req.url));
   }
 
   return withAuth(req as NextRequestWithAuth, event);
 }
 
-// ignore docs
 export const config = {
-  matcher: ["/((?!docs|api).*)"],
+  matcher: ["/((?!api).*)"],
 };

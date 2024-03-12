@@ -10,7 +10,7 @@ interface Props {
 
 const CustomError = ({ message }: Props) => {
   return (
-    <>
+    <div className="space-y-6">
       <SimpleAlert
         variant="destructive"
         message={message ?? "Failed to connect to Notion"}
@@ -20,7 +20,7 @@ const CustomError = ({ message }: Props) => {
           Try again
         </Link>
       </Button>
-    </>
+    </div>
   );
 };
 
