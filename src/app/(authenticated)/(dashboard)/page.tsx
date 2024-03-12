@@ -1,20 +1,18 @@
 import Link from "next/link";
 
-import { createAsyncCaller } from "@/app/api/trpc/trpc.router";
 import { SimpleAlert } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 
+import { getNotionStatus } from "../utils";
 import BookmarkContainer from "./bookmark-container";
 
 const Dashboard = async () => {
-  const caller = await createAsyncCaller();
-  const data = await caller.getNotionData();
-
+  const data = await getNotionStatus();
   const isConnectedToNotion = !!(data?.accessToken && data.databaseId);
 
   if (!isConnectedToNotion)
     return (
-      <div className="space-y-4">
+      <div className="mx-auto flex max-w-[480px] flex-col justify-center gap-6">
         <SimpleAlert
           variant="warn"
           title="You haven't connected to Notion"

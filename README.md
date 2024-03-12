@@ -64,12 +64,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - [ ] Check if the notion database has every needed property
 - [ ] Handle expired notion's access token
 
-### Pages
-
-- [ ] Dashboard `/dashboard`
-- [ ] Docs/tutorial `/docs`
-- [ ] Landing page `/`
-
 ### Error handler
 
 - [ ] user_email_unique: email already exist

@@ -15,7 +15,7 @@ const ProceedRedirect = ({ code }: Props) => {
   const router = useRouter();
   const { mutate, error } = trpc.connectToNotion.useMutation({
     onSuccess() {
-      router.push("/dashboard");
+      router.push("/");
     },
   });
 

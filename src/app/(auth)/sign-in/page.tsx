@@ -47,7 +47,7 @@ const LoginForm = ({ searchParams }: Props) => {
     },
     onSuccess: () => {
       toast.success("Successfully signed in", { position: "top-center" });
-      router.push(searchParams.callbackUrl ?? "/dashboard");
+      router.push(searchParams.callbackUrl ?? "/");
     },
   });
 
