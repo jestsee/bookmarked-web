@@ -1,7 +1,7 @@
-diff --git a/node_modules/trpc-openapi/dist/adapters/node-http/core.js b/node_modules/trpc-openapi/dist/adapters/node-http/core.js
-index ad1b3e5..5256384 100644
---- a/node_modules/trpc-openapi/dist/adapters/node-http/core.js
-+++ b/node_modules/trpc-openapi/dist/adapters/node-http/core.js
+diff --git a/dist/adapters/node-http/core.js b/dist/adapters/node-http/core.js
+index ad1b3e5d8fc9d5a9dcdcb5c719f2a3a66fc5f29a..5256384c2a4d9058e9083627439d71f3c9d67059 100644
+--- a/dist/adapters/node-http/core.js
++++ b/dist/adapters/node-http/core.js
 @@ -109,7 +109,7 @@ const createOpenApiNodeHttpHandler = (opts) => {
                  data: [data],
                  errors: [error],
@@ -11,10 +11,10 @@ index ad1b3e5..5256384 100644
                  error,
                  type: (_f = procedure === null || procedure === void 0 ? void 0 : procedure.type) !== null && _f !== void 0 ? _f : 'unknown',
                  path: procedure === null || procedure === void 0 ? void 0 : procedure.path,
-diff --git a/node_modules/trpc-openapi/dist/adapters/node-http/procedures.js b/node_modules/trpc-openapi/dist/adapters/node-http/procedures.js
-index a785c0b..717cb84 100644
---- a/node_modules/trpc-openapi/dist/adapters/node-http/procedures.js
-+++ b/node_modules/trpc-openapi/dist/adapters/node-http/procedures.js
+diff --git a/dist/adapters/node-http/procedures.js b/dist/adapters/node-http/procedures.js
+index a785c0b1b325ad4b16b8dc25c4eec167df80b30c..717cb84bd10acdf07c00e45fc6a21bc1ac28a253 100644
+--- a/dist/adapters/node-http/procedures.js
++++ b/dist/adapters/node-http/procedures.js
 @@ -5,8 +5,7 @@ const path_1 = require("../../utils/path");
  const procedure_1 = require("../../utils/procedure");
  const createProcedureCache = (router) => {
@@ -52,10 +52,10 @@ index a785c0b..717cb84 100644
      return (method, path) => {
          var _a, _b;
          const procedureMethodCache = procedureCache.get(method);
-diff --git a/node_modules/trpc-openapi/dist/utils/procedure.js b/node_modules/trpc-openapi/dist/utils/procedure.js
-index c838521..8e47181 100644
---- a/node_modules/trpc-openapi/dist/utils/procedure.js
-+++ b/node_modules/trpc-openapi/dist/utils/procedure.js
+diff --git a/dist/utils/procedure.js b/dist/utils/procedure.js
+index c838521e9c8d50febf7428a3c91060353bc0366e..8e471819466962564f92f5ef92b0beb8627dfe93 100644
+--- a/dist/utils/procedure.js
++++ b/dist/utils/procedure.js
 @@ -16,15 +16,7 @@ const getInputOutputParsers = (procedure) => {
      };
  };
