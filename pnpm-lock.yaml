@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  trpc-openapi@1.2.0:
+    hash: lxqkmbt2z5ofnic65o4yikkzgi
+    path: patches/trpc-openapi@1.2.0.patch
+
 dependencies:
   '@auth/core':
     specifier: ^0.24.0
@@ -100,7 +105,7 @@ dependencies:
     version: registry.npmjs.org/tailwindcss-animate@1.0.7(tailwindcss@3.4.1)
   trpc-openapi:
     specifier: ^1.2.0
-    version: registry.npmjs.org/trpc-openapi@1.2.0(@trpc/server@11.0.0-next-beta.318)(zod@3.22.4)
+    version: registry.npmjs.org/trpc-openapi@1.2.0(patch_hash=lxqkmbt2z5ofnic65o4yikkzgi)(@trpc/server@11.0.0-next-beta.318)(zod@3.22.4)
   zod:
     specifier: ^3.22.4
     version: registry.npmjs.org/zod@3.22.4
@@ -5614,7 +5619,7 @@ packages:
     engines: {node: '>=0.6'}
     dev: false
 
-  registry.npmjs.org/trpc-openapi@1.2.0(@trpc/server@11.0.0-next-beta.318)(zod@3.22.4):
+  registry.npmjs.org/trpc-openapi@1.2.0(patch_hash=lxqkmbt2z5ofnic65o4yikkzgi)(@trpc/server@11.0.0-next-beta.318)(zod@3.22.4):
     resolution: {integrity: sha512-pfYoCd/3KYXWXvUPZBKJw455OOwngKN/6SIcj7Yit19OMLJ+8yVZkEvGEeg5wUSwfsiTdRsKuvqkRPXVSwV7ew==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/trpc-openapi/-/trpc-openapi-1.2.0.tgz}
     id: registry.npmjs.org/trpc-openapi/1.2.0
     name: trpc-openapi
@@ -5634,6 +5639,7 @@ packages:
     transitivePeerDependencies:
       - uWebSockets.js
     dev: false
+    patched: true
 
   registry.npmjs.org/ts-api-utils@1.2.1(typescript@5.3.3):
     resolution: {integrity: sha512-RIYA36cJn2WiH9Hy77hdF9r7oEwxAtB/TS9/S4Qd90Ap4z5FSiin5zEiTL44OII1Y3IIlEvxwxFUVgrHSZ/UpA==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/ts-api-utils/-/ts-api-utils-1.2.1.tgz}
