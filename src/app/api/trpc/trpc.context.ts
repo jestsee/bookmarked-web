@@ -7,9 +7,9 @@ import { authOptions } from "../auth/[...nextauth]/auth-options";
 const deserializeUser = async () => {
   const session = await getServerSession(authOptions);
 
-  if (!session?.user) return { user: null };
+  if (!session || !session?.user) return { user: null };
 
-  return { user: session?.user };
+  return { user: session.user };
 };
 
 export const createContext = async () => deserializeUser();

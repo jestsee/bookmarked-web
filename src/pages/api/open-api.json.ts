@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { generateOpenApiDocument } from "trpc-openapi";
 
-import { appRouter } from "../test-router";
+import { appRouter } from "@/server/test-router";
 
 const openApiDocument = generateOpenApiDocument(appRouter, {
   title: "tRPC OpenAPI",

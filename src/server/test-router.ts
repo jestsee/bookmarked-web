@@ -1,11 +1,11 @@
 import { z } from "zod";
 
-import { t } from "../trpc/trpc.server";
+import { t } from "@/app/api/trpc/trpc.server";
 
 export const appRouter = t.router({
   sayHello: t.procedure
     .meta({ /* 👉 */ openapi: { method: "GET", path: "/say-hello" } })
-    .input(z.object({ name: z.string() }))
+    .input(z.void())
     .output(z.object({ greeting: z.string() }))
     .query(() => {
       return { greeting: `Hello gan!` };
