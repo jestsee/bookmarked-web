@@ -73,3 +73,10 @@ export const notion = pgTable(
     compoundKey: primaryKey({ columns: [vt.databaseId, vt.userId] }),
   }),
 );
+
+export const telegram = pgTable("telegram", {
+  telegramId: text("telegramId").notNull().primaryKey(),
+  userId: text("userId")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+});

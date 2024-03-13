@@ -58,11 +58,21 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - [x] Deploy to vercel
 - [x] Google authentication provider
 - [x] Validate tweet url (twitter keyword; regex)
+- [x] Notion template to clone
+- [ ] Move `/redirect` to `/redirect/access-token`
 - [ ] Twitter authentication provider
-- [ ] Notion template to clone
 - [ ] Handle condition when the user doesn't have any notion database
 - [ ] Check if the notion database has every needed property
-- [ ] Handle expired notion's access token
+- [ ] Handle expired notion's access token; provide mechanism to reconnect to Notion
+
+```
+{
+    "status": "failed",
+    "type": "thread",
+    "url": "https://twitter.com/warpdotdev/status/1767250494714466461",
+    "message": "API token is invalid."
+}
+```
 
 ### Error handler
 

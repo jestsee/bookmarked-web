@@ -4,6 +4,10 @@ export type Input<T> = {
   input: T;
 };
 
+export type User = {
+  userId: string;
+};
+
 export const serverErrorSchema = z.object({
   message: z.union([z.string(), z.string().array()]),
   error: z.string().optional(),
