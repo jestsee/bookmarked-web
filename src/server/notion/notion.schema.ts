@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { Input } from "@/types/server";
+import { Input, User } from "@/types/server";
 
 export const createAccessTokenPayload = z.object({
   code: z
@@ -54,10 +54,6 @@ export const retryBookmarkStatusResponse = z.object({
   error: z.string().optional(),
   statusCode: z.number().optional(),
 });
-
-export type User = {
-  userId: string;
-};
 
 export type CreateAccessTokenPayload = z.TypeOf<
   typeof createAccessTokenPayload
