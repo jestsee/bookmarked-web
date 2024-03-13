@@ -5,7 +5,6 @@ import { createContext } from "../trpc.context";
 import { appRouter } from "../trpc.router";
 
 const handler = (request: NextRequest) => {
-  console.log("loh masoknya yang ini");
   return fetchRequestHandler({
     endpoint: "/api/trpc",
     req: request,
