@@ -6,7 +6,7 @@ services:
       context: . #if your Dockerfile is not at the same level change the path here (./frontend)
       target: dev
     restart: always
-    command: yarn dev
+    command: pnpm dev
     environment:
       - NODE_ENV=development
       #if you’re using Windows, you may need to uncomment the next line - Sol from @Kobe E
