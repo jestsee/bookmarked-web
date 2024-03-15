@@ -12,7 +12,10 @@
     "db:push": "drizzle-kit push:pg",
     "db:migrate": "tsx src/database/migrate.ts",
     "db:studio": "drizzle-kit studio",
-    "docker:dev": "docker compose up -d --build"
+    "docker:dev": "docker compose up -d --build",
+    "docker:rm": "docker compose rm -s -f -v",
+    "docker:rmi": "docker rmi bookmarked-web-frontend",
+    "docker:restart": "pnpm docker:rm && pnpm docker:rmi && pnpm docker:dev"
   },
   "dependencies": {
     "@auth/core": "^0.24.0",
