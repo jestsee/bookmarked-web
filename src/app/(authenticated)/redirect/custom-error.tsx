@@ -15,6 +15,7 @@ const CustomError = ({ message }: Props) => {
         variant="destructive"
         message={message ?? "Failed to connect to Notion"}
       />
+      {/* TODO */}
       <Button asChild>
         <Link href={process.env.NEXT_PUBLIC_NOTION_AUTHORIZATION_URL}>
           Try again
