@@ -24,7 +24,7 @@ const notionRouter = t.router({
     getNotionDataHandler(ctx.user?.id!),
   ),
   bookmarkTweet: protectedProcedure
-    .meta({ openapi: { method: "POST", path: "/bookmark-tweet" } })
+    // .meta({ openapi: { method: "POST", path: "/bookmark-tweet" } })
     .input(bookmarkPayload)
     .mutation(({ input, ctx }) =>
       bookmarkTweetHandler({ input, userId: ctx.user?.id! }),

@@ -14,6 +14,10 @@ export const tokenExchangeHandler = async ({ token }: TokenExchangePayload) => {
     .from(tokenExchange)
     .where(eq(tokenExchange.temporaryToken, token));
 
+  if (!result) {
+    throw new TRPCError({ code: "UNAUTHORIZED", message: "Invalid token" });
+  }
+
   // check if token already expired
   if (result.expiresAt.getTime() < new Date().getTime()) {
     throw new TRPCError({

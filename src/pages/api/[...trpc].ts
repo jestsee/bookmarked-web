@@ -6,16 +6,23 @@ import { createOpenApiNextHandler } from "trpc-openapi";
 
 import { appRouter } from "@/server/test-router";
 
+// import { appRouter } from "@/server/trpc/trpc.router";
+
 type CreeateOpenAPIContext = {
-  user: DefaultUser & { id: string };
+  user: (DefaultUser & { id: string }) | null;
 };
+
+const publicRoutes = ["/token"];
 
 const createOpenAPIContext = async (
   req: NextApiRequest,
 ): Promise<CreeateOpenAPIContext> => {
-  const token = await getToken({ req });
-  console.log(token);
+  const isAccessingPublicRoute = publicRoutes.some((suffix) =>
+    req.url?.includes(suffix),
+  );
+  if (isAccessingPublicRoute) return { user: null };
 
+  const token = await getToken({ req });
   if (!token || !token.sub) {
     throw new TRPCError({
       code: "UNAUTHORIZED",

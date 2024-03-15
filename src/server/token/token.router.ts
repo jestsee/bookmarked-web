@@ -5,7 +5,8 @@ import { tokenExchangePayload, tokenExchangeResponse } from "./token.schema";
 
 export const tokenRouter = t.router({
   tokenExchange: publicProcedure
+    .meta({ openapi: { method: "POST", path: "/token" } })
     .input(tokenExchangePayload)
     .output(tokenExchangeResponse)
-    .query(({ input }) => tokenExchangeHandler(input)),
+    .mutation(({ input }) => tokenExchangeHandler(input)),
 });
