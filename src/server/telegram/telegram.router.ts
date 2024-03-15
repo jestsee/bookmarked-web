@@ -1,4 +1,4 @@
-import { protectedProcedure, t } from "@/app/api/trpc/trpc.server";
+import { protectedProcedure, t } from "@/server/trpc/trpc.server";
 
 import { connectToTelegramHandler } from "./telegram.controller";
 import { connectToTelegramPayload } from "./telegram.schema";

@@ -14,8 +14,8 @@ interface Props {
 // TODO refactor so only one ProceedRedirect component will be used
 const ProceedRedirect = ({ bot, telegramId }: Props) => {
   const { mutate, error } = trpc.connectToTelegram.useMutation({
-    onSuccess({ userId }) {
-      const redirectUrl = `https://t.me/${bot}?start=${userId}`;
+    onSuccess({ token }) {
+      const redirectUrl = `https://t.me/${bot}?start=${token}`;
       window.location.href = redirectUrl;
     },
   });

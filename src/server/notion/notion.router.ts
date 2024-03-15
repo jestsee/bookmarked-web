@@ -1,4 +1,4 @@
-import { protectedProcedure, t } from "@/app/api/trpc/trpc.server";
+import { protectedProcedure, t } from "@/server/trpc/trpc.server";
 
 import {
   bookmarkTweetHandler,
