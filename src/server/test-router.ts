@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { t } from "@/app/api/trpc/trpc.server";
+import { t } from "@/server/trpc/trpc.server";
 
 export const appRouter = t.router({
   sayHello: t.procedure

@@ -1,12 +1,20 @@
 import { TRPCError } from "@trpc/server";
 import { NextApiRequest, NextApiResponse } from "next";
+import { DefaultUser } from "next-auth";
 import { getToken } from "next-auth/jwt";
 import { createOpenApiNextHandler } from "trpc-openapi";
 
 import { appRouter } from "@/server/test-router";
 
-const createContext = async (req: NextApiRequest) => {
+type CreeateOpenAPIContext = {
+  user: DefaultUser & { id: string };
+};
+
+const createOpenAPIContext = async (
+  req: NextApiRequest,
+): Promise<CreeateOpenAPIContext> => {
   const token = await getToken({ req });
+  console.log(token);
 
   if (!token || !token.sub) {
     throw new TRPCError({
@@ -21,7 +29,7 @@ const createContext = async (req: NextApiRequest) => {
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   return createOpenApiNextHandler({
-    createContext: () => createContext(req),
+    createContext: () => createOpenAPIContext(req),
     router: appRouter,
     onError: null,
     responseMeta: null,

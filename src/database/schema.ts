@@ -1,6 +1,8 @@
 import type { AdapterAccount } from "@auth/core/adapters";
+import { sql } from "drizzle-orm";
 import {
   integer,
+  pgEnum,
   pgTable,
   primaryKey,
   text,
@@ -74,9 +76,33 @@ export const notion = pgTable(
   }),
 );
 
-export const telegram = pgTable("telegram", {
-  telegramId: text("telegramId").notNull().primaryKey(),
+// social media account which connected
+export const socialMediaAccountProviderEnum = pgEnum("accountProvider", [
+  "telegram",
+]);
+export const connectedAccount = pgTable(
+  "connectedAccount",
+  {
+    accountId: text("accountId").notNull(),
+    accountProvider: socialMediaAccountProviderEnum("accountProvider"),
+    userId: text("userId")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+  },
+  (vt) => ({
+    compoundKey: primaryKey({ columns: [vt.accountId, vt.accountProvider] }),
+  }),
+);
+
+export const tokenExchange = pgTable("tokenExchange", {
+  id: text("id").notNull().primaryKey(),
   userId: text("userId")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
+  temporaryToken: text("temporaryToken").notNull().unique(),
+  accessToken: text("accessToken").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  expiresAt: timestamp("expiresAt")
+    .default(sql`NOW() + INTERVAL '5 minutes'`)
+    .notNull(),
 });
