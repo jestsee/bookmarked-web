@@ -25,7 +25,7 @@ const UserInfo = async ({ user }: Props) => {
       </div>
       <Avatar>
         {user.image && <AvatarImage src={user.image} />}
-        <AvatarFallback>{name[0].toUpperCase()}</AvatarFallback>
+        <AvatarFallback>{(name[0] ?? "u").toUpperCase()}</AvatarFallback>
       </Avatar>
       <SignOutWrapper>
         <Button

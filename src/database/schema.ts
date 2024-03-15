@@ -1,6 +1,7 @@
 import type { AdapterAccount } from "@auth/core/adapters";
 import { sql } from "drizzle-orm";
 import {
+  boolean,
   integer,
   pgEnum,
   pgTable,
@@ -65,8 +66,8 @@ export const verificationTokens = pgTable(
 export const notion = pgTable(
   "notion",
   {
-    accessToken: text("accessToken"),
-    databaseId: text("databaseId"),
+    accessToken: text("accessToken").notNull(),
+    databaseId: text("databaseId").notNull(),
     userId: text("userId")
       .notNull()
       .references(() => users.id, { onDelete: "cascade" }),
@@ -84,7 +85,8 @@ export const connectedAccount = pgTable(
   "connectedAccount",
   {
     accountId: text("accountId").notNull(),
-    accountProvider: socialMediaAccountProviderEnum("accountProvider"),
+    accountProvider:
+      socialMediaAccountProviderEnum("accountProvider").notNull(),
     userId: text("userId")
       .notNull()
       .references(() => users.id, { onDelete: "cascade" }),
@@ -105,4 +107,5 @@ export const tokenExchange = pgTable("tokenExchange", {
   expiresAt: timestamp("expiresAt")
     .default(sql`NOW() + INTERVAL '5 minutes'`)
     .notNull(),
+  invoked: boolean("invoked").default(false),
 });
