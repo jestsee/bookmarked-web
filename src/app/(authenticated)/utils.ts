@@ -1,6 +1,6 @@
 import { cache } from "react";
 
-import { createAsyncCaller } from "../api/trpc/trpc.router";
+import { createAsyncCaller } from "@/server/trpc/trpc.router";
 
 export const getNotionStatus = cache(async () => {
   const caller = await createAsyncCaller();

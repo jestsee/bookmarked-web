@@ -1,5 +1,5 @@
-import { publicProcedure, t } from "@/app/api/trpc/trpc.server";
 import { createUserSchema } from "@/server/auth/auth.schema";
+import { publicProcedure, t } from "@/server/trpc/trpc.server";
 
 import { registerHandler } from "./auth.controller";
 
