@@ -4,9 +4,7 @@ import { DefaultUser } from "next-auth";
 import { getToken } from "next-auth/jwt";
 import { createOpenApiNextHandler } from "trpc-openapi";
 
-import { appRouter } from "@/server/test-router";
-
-// import { appRouter } from "@/server/trpc/trpc.router";
+import { appRouter } from "@/server/trpc/trpc.router";
 
 type CreeateOpenAPIContext = {
   user: (DefaultUser & { id: string }) | null;
