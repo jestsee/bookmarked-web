@@ -11,7 +11,8 @@
     "db:drop": "drizzle-kit drop",
     "db:push": "drizzle-kit push:pg",
     "db:migrate": "tsx src/database/migrate.ts",
-    "db:studio": "drizzle-kit studio"
+    "db:studio": "drizzle-kit studio",
+    "docker:dev": "docker compose up -d --build"
   },
   "dependencies": {
     "@auth/core": "^0.24.0",
