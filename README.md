@@ -73,12 +73,3 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
     "message": "API token is invalid."
 }
 ```
-
-### Error handler
-
-- [ ] user_email_unique: email already exist
-
-### UI
-
-- [ ] display integration status with notion `(connected/not-connected)`
-- [x] rewrite the authentication page
