@@ -1,7 +1,7 @@
 import {
   DefaultErrorShape,
   ErrorFormatter,
-} from "@trpc/server/unstable-core-do-not-import"; // TODO lol
+} from "@trpc/server/unstable-core-do-not-import";
 
 import { Context } from "../trpc.context";
 import { databaseErrors } from "./database";
