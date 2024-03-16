@@ -2,10 +2,12 @@ import { initTRPC, TRPCError } from "@trpc/server";
 import SuperJSON from "superjson";
 import { OpenApiMeta } from "trpc-openapi";
 
+import errorFormatter from "./errors";
 import { Context } from "./trpc.context";
 
 export const t = initTRPC.context<Context>().meta<OpenApiMeta>().create({
   transformer: SuperJSON,
+  errorFormatter,
 });
 
 const isAuthenticated = t.middleware(({ next, ctx }) => {
