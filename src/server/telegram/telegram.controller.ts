@@ -30,7 +30,6 @@ export const connectToTelegramHandler = async ({
   }
 
   await db.insert(tokenExchange).values({
-    id: crypto.randomUUID(),
     accessToken: tokenStore?.value,
     temporaryToken,
     userId,
