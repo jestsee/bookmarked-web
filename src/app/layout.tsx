@@ -24,7 +24,7 @@ export default function RootLayout({
       <body className={cn("mx-auto max-w-2xl px-4", inter.className)}>
         <Providers>
           {children}
-          <Toaster richColors position="top-right" />
+          <Toaster richColors position="top-center" />
         </Providers>
       </body>
     </html>

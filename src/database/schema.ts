@@ -1,6 +1,9 @@
 import type { AdapterAccount } from "@auth/core/adapters";
+import { sql } from "drizzle-orm";
 import {
+  boolean,
   integer,
+  pgEnum,
   pgTable,
   primaryKey,
   text,
@@ -63,8 +66,8 @@ export const verificationTokens = pgTable(
 export const notion = pgTable(
   "notion",
   {
-    accessToken: text("accessToken"),
-    databaseId: text("databaseId"),
+    accessToken: text("accessToken").notNull(),
+    databaseId: text("databaseId").notNull(),
     userId: text("userId")
       .notNull()
       .references(() => users.id, { onDelete: "cascade" }),
@@ -73,3 +76,35 @@ export const notion = pgTable(
     compoundKey: primaryKey({ columns: [vt.databaseId, vt.userId] }),
   }),
 );
+
+// social media account which connected
+export const socialMediaAccountProviderEnum = pgEnum("accountProvider", [
+  "telegram",
+]);
+export const connectedAccount = pgTable(
+  "connectedAccount",
+  {
+    accountId: text("accountId").notNull(),
+    accountProvider:
+      socialMediaAccountProviderEnum("accountProvider").notNull(),
+    userId: text("userId")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+  },
+  (vt) => ({
+    compoundKey: primaryKey({ columns: [vt.accountId, vt.accountProvider] }),
+  }),
+);
+
+export const tokenExchange = pgTable("tokenExchange", {
+  temporaryToken: text("temporaryToken").notNull().primaryKey(),
+  userId: text("userId")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  accessToken: text("accessToken").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  expiresAt: timestamp("expiresAt")
+    .default(sql`NOW() + INTERVAL '5 minutes'`)
+    .notNull(),
+  invoked: boolean("invoked").default(false),
+});

@@ -1,4 +1,6 @@
-import { protectedProcedure, t } from "@/app/api/trpc/trpc.server";
+import { z } from "zod";
+
+import { protectedProcedure, t } from "@/server/trpc/trpc.server";
 
 import {
   bookmarkTweetHandler,
@@ -24,7 +26,9 @@ const notionRouter = t.router({
     getNotionDataHandler(ctx.user?.id!),
   ),
   bookmarkTweet: protectedProcedure
+    .meta({ openapi: { method: "POST", path: "/bookmark-tweet" } })
     .input(bookmarkPayload)
+    .output(z.object({ id: z.string(), status: z.string() }))
     .mutation(({ input, ctx }) =>
       bookmarkTweetHandler({ input, userId: ctx.user?.id! }),
     ),
