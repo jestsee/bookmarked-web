@@ -4,7 +4,7 @@ import {
 } from "@trpc/server/unstable-core-do-not-import";
 
 import { Context } from "../trpc.context";
-import { databaseErrors } from "./database";
+import databaseErrors from "./database";
 import { AtLeastTwoElements } from "./type";
 
 const splitError = (rawMessage: string) => {

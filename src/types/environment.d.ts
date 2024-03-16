@@ -13,6 +13,7 @@ declare global {
       BOOKMARKED_API_URL: string;
       NEXT_PUBLIC_NOTION_AUTHORIZATION_URL: string;
       NEXTAUTH_SECRET: string;
+      SESSION_TOKEN_NAME: string;
       // ENV: "test" | "dev" | "prod";
     }
   }
