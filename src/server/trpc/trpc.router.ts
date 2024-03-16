@@ -1,8 +1,7 @@
-import authRouter from "@/server/auth/auth.router";
-import notionRouter from "@/server/notion/notion.router";
-import telegramRouter from "@/server/telegram/telegram.router";
-import { tokenRouter } from "@/server/token/token.router";
-
+import authRouter from "../auth/auth.router";
+import notionRouter from "../notion/notion.router";
+import telegramRouter from "../telegram/telegram.router";
+import tokenRouter from "../token/token.router";
 import { createContext } from "./trpc.context";
 import { t } from "./trpc.server";
 
