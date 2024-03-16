@@ -50,7 +50,7 @@ export const connectToTelegramHandler = async ({
   }
 
   const temporaryToken = crypto.randomUUID();
-  const tokenStore = cookies().get("next-auth.session-token");
+  const tokenStore = cookies().get(process.env.SESSION_TOKEN_NAME);
 
   if (!tokenStore?.value) {
     throw new TRPCError({ message: "Token not found", code: "NOT_FOUND" });
