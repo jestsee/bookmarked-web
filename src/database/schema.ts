@@ -97,11 +97,10 @@ export const connectedAccount = pgTable(
 );
 
 export const tokenExchange = pgTable("tokenExchange", {
-  id: text("id").notNull().primaryKey(),
+  temporaryToken: text("temporaryToken").notNull().primaryKey(),
   userId: text("userId")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
-  temporaryToken: text("temporaryToken").notNull().unique(),
   accessToken: text("accessToken").notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   expiresAt: timestamp("expiresAt")
