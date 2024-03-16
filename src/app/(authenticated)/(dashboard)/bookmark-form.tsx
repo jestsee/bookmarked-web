@@ -50,7 +50,7 @@ const BookmarkForm = ({ processBookmark }: Props) => {
 
   return (
     <form className="mx-auto max-w-lg" {...{ onSubmit }}>
-      <div className="space-y-4">
+      <div className="space-y-6">
         <div>
           <div className="flex w-full gap-2">
             <Input
