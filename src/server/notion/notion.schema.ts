@@ -36,6 +36,10 @@ export const bookmarkResponse = z.object({
   id: z.string(),
 });
 
+export const bookmarkOutput = bookmarkPayload
+  .merge(bookmarkResponse)
+  .merge(z.object({ author: z.string(), status: z.string() }));
+
 export const getBookmarkStatusPayload = bookmarkResponse;
 
 export const bookmarkStatus = z.enum(["completed", "on_progress", "failed"]);
@@ -74,6 +78,8 @@ export type BookmarkPayload = z.TypeOf<typeof bookmarkPayload>;
 export type BookmarkTweetPayload = Input<BookmarkPayload> & User;
 
 export type BookmarkResponse = z.TypeOf<typeof bookmarkResponse>;
+
+export type BookmarkOutput = z.TypeOf<typeof bookmarkOutput>;
 
 export type BookmarkStatus = z.TypeOf<typeof bookmarkStatus>;
 

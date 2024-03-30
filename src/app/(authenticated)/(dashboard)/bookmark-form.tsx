@@ -32,7 +32,7 @@ const BookmarkForm = ({ processBookmark }: Props) => {
     defaultValues: { type: DEFAULT_TYPE },
   });
 
-  const { mutateAsync, isPending, error } = trpc.bookmarkTweet.useMutation();
+  const { mutateAsync, isPending } = trpc.bookmarkTweet.useMutation();
 
   const onSubmit = handleSubmit((values) => {
     toast.promise(mutateAsync(values), {
@@ -42,8 +42,8 @@ const BookmarkForm = ({ processBookmark }: Props) => {
         processBookmark({ id: response.id, ...values });
         return "Track your bookmark status below";
       },
-      error() {
-        return error?.message;
+      error(errorResponse) {
+        return errorResponse?.message ?? "Something went wrong";
       },
     });
   });
