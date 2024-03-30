@@ -16,6 +16,7 @@ import {
   RetryBookmarkPayload,
   retryBookmarkStatusResponse,
 } from "./notion.schema";
+import { getTweetAuthor } from "./notion.utils";
 
 const HEADERS = { "Content-Type": "application/json" };
 
@@ -105,9 +106,11 @@ export const bookmarkTweetHandler = async ({
       body: JSON.stringify(body),
     },
   );
-  const responseData = await validateResponse(response, bookmarkResponse);
+  const { id } = await validateResponse(response, bookmarkResponse);
 
-  return { status: "success", ...responseData };
+  const author = getTweetAuthor(url);
+
+  return { status: "success", id, author, url, type };
 };
 
 export const getBookmarkStatusHandler = async ({
