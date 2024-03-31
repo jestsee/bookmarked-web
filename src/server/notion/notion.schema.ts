@@ -38,7 +38,7 @@ export const bookmarkResponse = z.object({
 
 export const bookmarkOutput = bookmarkPayload
   .merge(bookmarkResponse)
-  .merge(z.object({ author: z.string(), status: z.string() }));
+  .merge(z.object({ author: z.string() }));
 
 export const getBookmarkStatusPayload = bookmarkResponse;
 

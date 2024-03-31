@@ -39,7 +39,7 @@ const BookmarkForm = ({ processBookmark }: Props) => {
       loading: "Please wait...",
       success(response) {
         reset();
-        processBookmark({ id: response.id, ...values });
+        processBookmark({ ...response, ...values });
         return "Track your bookmark status below";
       },
       error(errorResponse) {

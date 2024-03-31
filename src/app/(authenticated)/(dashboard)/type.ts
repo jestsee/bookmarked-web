@@ -1,5 +1,3 @@
-import { BookmarkPayload } from "@/server/notion/notion.schema";
+import { BookmarkOutput } from "@/server/notion/notion.schema";
 
-export interface ProcessedBookmark extends BookmarkPayload {
-  id: string;
-}
+export interface ProcessedBookmark extends BookmarkOutput {}
