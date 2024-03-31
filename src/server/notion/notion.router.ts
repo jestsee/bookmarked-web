@@ -1,5 +1,3 @@
-import { z } from "zod";
-
 import { protectedProcedure, t } from "@/server/trpc/trpc.server";
 
 import {
@@ -10,6 +8,7 @@ import {
   retryBookmarkHandler,
 } from "./notion.controller";
 import {
+  bookmarkOutput,
   bookmarkPayload,
   createAccessTokenPayload,
   getBookmarkStatusPayload,
@@ -28,7 +27,7 @@ const notionRouter = t.router({
   bookmarkTweet: protectedProcedure
     .meta({ openapi: { method: "POST", path: "/bookmark-tweet" } })
     .input(bookmarkPayload)
-    .output(z.object({ id: z.string(), status: z.string() }))
+    .output(bookmarkOutput)
     .mutation(({ input, ctx }) =>
       bookmarkTweetHandler({ input, userId: ctx.user?.id! }),
     ),

@@ -12,7 +12,7 @@ import { ProcessedBookmark } from "./type";
 
 interface Props extends ProcessedBookmark {}
 
-const BookmarkItem = ({ id, type, url }: Props) => {
+const BookmarkItem = ({ id, type, url, author }: Props) => {
   const { data, refetch: refetchStatus } = trpc.getBookmarkStatus.useQuery(
     { id },
     {
@@ -51,7 +51,11 @@ const BookmarkItem = ({ id, type, url }: Props) => {
           </Link>
         </Button>
         <div className="py-1">
-          <p className="capitalize">{type}</p>
+          <div className="flex items-center gap-2">
+            <p className="text-sm capitalize">{type}</p>
+            {/* TODO redirect to author's profile when clicked */}
+            <p className="text-[11px] text-slate-400">by @{author}</p>
+          </div>
           {data.message && (
             <p className="text-xs text-rose-700">{data.message}</p>
           )}

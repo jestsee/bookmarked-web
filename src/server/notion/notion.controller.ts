@@ -6,6 +6,7 @@ import { notion } from "@/database/schema";
 import { validateResponse } from "@/lib/validation";
 
 import {
+  BookmarkOutput,
   bookmarkResponse,
   BookmarkTweetPayload,
   ConnectToNotionPayload,
@@ -76,7 +77,7 @@ export const getNotionDataHandler = async (userId: string) => {
 export const bookmarkTweetHandler = async ({
   input: { url, type = "thread" },
   userId,
-}: BookmarkTweetPayload) => {
+}: BookmarkTweetPayload): Promise<BookmarkOutput> => {
   const data = await getNotionDataHandler(userId);
 
   if (!data) {
@@ -110,7 +111,7 @@ export const bookmarkTweetHandler = async ({
 
   const author = getTweetAuthor(url);
 
-  return { status: "success", id, author, url, type };
+  return { id, author, url, type };
 };
 
 export const getBookmarkStatusHandler = async ({
