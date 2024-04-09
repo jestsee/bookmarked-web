@@ -32,7 +32,11 @@ export default async function handler(
   };
 
   eventSource.onerror = (event) => {
-    console.log("onerror", event.data);
+    if (event.data) {
+      res.write(`event: error\ndata: ${event.data}\n\n`);
+    }
+
+    res.flushHeaders();
     eventSource.close();
     res.end();
   };
