@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+import { Button } from "@/components/ui/button";
+
 import BookmarkForm from "./bookmark-form";
 import BookmarkItem from "./bookmark-item";
 import { ProcessedBookmark } from "./type";
@@ -18,7 +20,16 @@ const BookmarkContainer = () => {
       <BookmarkForm {...{ processBookmark }} />
       {processed.length > 0 && (
         <div className="space-y-3">
-          <p>Status</p>
+          <div className="flex items-center justify-between">
+            <p>Status</p>
+            <Button
+              variant="link"
+              className="text-emerald-400"
+              onClick={() => setProcessed([])}
+            >
+              Clear all
+            </Button>
+          </div>
           {processed.map((item) => (
             <BookmarkItem key={item.id} {...item} />
           ))}

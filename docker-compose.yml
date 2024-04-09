@@ -17,5 +17,7 @@ services:
       - /app/.next
     ports:
       - 3000:3000
+    extra_hosts:
+      - host.docker.internal:host-gateway
 # reference
 # https://medium.com/@elifront/best-next-js-docker-compose-hot-reload-production-ready-docker-setup-28a9125ba1dc
