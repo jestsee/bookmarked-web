@@ -17,9 +17,10 @@ import { ProcessedBookmark } from "./type";
 
 interface Props {
   processBookmark: (item: ProcessedBookmark) => void;
+  isReachedMaxConnection: boolean;
 }
 
-const BookmarkForm = ({ processBookmark }: Props) => {
+const BookmarkForm = ({ processBookmark, isReachedMaxConnection }: Props) => {
   const DEFAULT_TYPE = "thread";
   const {
     register,
@@ -35,6 +36,12 @@ const BookmarkForm = ({ processBookmark }: Props) => {
   const { mutateAsync, isPending } = trpc.bookmarkTweet.useMutation();
 
   const onSubmit = handleSubmit((values) => {
+    if (isReachedMaxConnection) {
+      toast.error(
+        "Maximum bookmarking limit reached. You can only have 4 bookmarks processing at a time. Please try again after some existing bookmarks finish.",
+      );
+      return;
+    }
     toast.promise(mutateAsync(values), {
       loading: "Please wait...",
       success(response) {
