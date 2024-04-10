@@ -28,11 +28,13 @@ const useBookmarkEvent = (id: string, options?: Options) => {
     const sse = new EventSource(`api/bookmark/status/${id}`);
 
     sse.onmessage = (event) => {
+      console.log("[client onmessage]", event);
       const data = JSON.parse(event.data) as BookmarkStatus;
       processData(data);
     };
 
     sse.onerror = (event) => {
+      console.log("[client onmessage]", event);
       setErrorMessage((event as unknown as { data: string }).data);
       options?.onClose();
       sse.close();

@@ -26,14 +26,15 @@ export async function GET(
   );
 
   response.onmessage = async (event) => {
+    console.log("[server onmessage]", event);
     await writer.write(
       encoder.encode(`event: message\ndata: ${event.data}\n\n`),
     );
   };
 
   response.onerror = async (event: Event & { data?: string }) => {
+    console.log("[server onerror]", event);
     if (event.data) {
-      console.log("evdat", event.data);
       await writer.write(
         encoder.encode(`event: error\ndata: ${event.data}\n\n`),
       );
