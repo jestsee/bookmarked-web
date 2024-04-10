@@ -2,7 +2,12 @@ import { useEffect, useState } from "react";
 
 import { BookmarkStatus, EventData, STATUS } from "./type";
 
-const useBookmarkEvent = (id: string) => {
+interface Options {
+  onOpen: () => void;
+  onClose: () => void;
+}
+
+const useBookmarkEvent = (id: string, options?: Options) => {
   const [data, setData] = useState<EventData>();
   const [errorMessage, setErrorMessage] = useState<string>();
 
@@ -14,6 +19,8 @@ const useBookmarkEvent = (id: string) => {
   };
 
   const openConnection = () => {
+    options?.onOpen();
+
     // reset needed when called on retry
     setData(undefined);
     setErrorMessage(undefined);
@@ -27,6 +34,7 @@ const useBookmarkEvent = (id: string) => {
 
     sse.onerror = (event) => {
       setErrorMessage((event as unknown as { data: string }).data);
+      options?.onClose();
       sse.close();
     };
 
@@ -36,7 +44,10 @@ const useBookmarkEvent = (id: string) => {
   useEffect(() => {
     const sse = openConnection();
 
-    return () => sse.close();
+    return () => {
+      if (data?.status !== STATUS.BOOKMARKED) options?.onClose();
+      sse.close();
+    };
   }, []);
 
   return { openConnection, eventData: data, errorMessage };

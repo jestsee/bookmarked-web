@@ -9,13 +9,20 @@ import { trpc } from "@/trpc-client/trpc";
 
 import BookmarkItemLoading from "./bookmark-item-loading";
 import BookmarkStatusBadge from "./bookmark-status";
-import { ProcessedBookmark } from "./type";
 import useBookmarkEvent from "./useBookmarkEvent";
 
-interface Props extends ProcessedBookmark {}
+interface Props {
+  id: string;
+  addConnection: () => void;
+  removeConnection: () => void;
+}
 
-const BookmarkItem = ({ id }: Props) => {
-  const { openConnection, errorMessage, eventData } = useBookmarkEvent(id);
+const BookmarkItem = ({ id, addConnection, removeConnection }: Props) => {
+  const { openConnection, errorMessage, eventData } = useBookmarkEvent(id, {
+    onOpen: addConnection,
+    onClose: removeConnection,
+  });
+
   const { mutateAsync } = trpc.retryBookmark.useMutation({
     onSuccess() {
       openConnection();
@@ -30,6 +37,11 @@ const BookmarkItem = ({ id }: Props) => {
       },
     });
   };
+
+  if (errorMessage && !eventData) {
+    toast.error(errorMessage);
+    return;
+  }
 
   if (!eventData) return <BookmarkItemLoading />;
 
@@ -54,7 +66,7 @@ const BookmarkItem = ({ id }: Props) => {
             data={eventData}
             error={!!errorMessage}
             onRetry={handleRetry}
-            className="mb-1 py-[1px]"
+            className="mb-1 py-[2px] text-[11px]"
           />
         </div>
         <p className="w-full overflow-hidden text-ellipsis whitespace-nowrap text-sm">
