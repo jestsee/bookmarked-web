@@ -44,8 +44,10 @@ export async function GET(
 
   return new Response(responseStream.readable, {
     headers: {
+      Connection: "keep-alive",
       "Content-Type": "text/event-stream",
       "Cache-Control": "no-cache, no-transform",
+      "Content-Encoding": "none",
     },
   });
 }
