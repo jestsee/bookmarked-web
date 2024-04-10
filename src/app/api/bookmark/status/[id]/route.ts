@@ -1,4 +1,4 @@
-import EventSource from "eventsource";
+// import EventSource from "eventsource";
 
 export const runtime = "edge";
 // This is required to enable streaming
