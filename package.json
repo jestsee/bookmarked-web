@@ -81,5 +81,8 @@
     "patchedDependencies": {
       "trpc-openapi@1.2.0": "patches/trpc-openapi@1.2.0.patch"
     }
+  },
+  "engines": {
+    "node": "20.x"
   }
 }
