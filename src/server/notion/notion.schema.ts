@@ -30,6 +30,7 @@ export const bookmarkPayload = z.object({
       { message: "Must be a valid tweet URL" },
     ),
   type: bookmarkTypeEnum.default("thread"),
+  callbackUrl: z.string().url().optional(),
 });
 
 export const bookmarkResponse = z.object({
