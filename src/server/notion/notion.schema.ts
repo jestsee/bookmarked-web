@@ -31,6 +31,7 @@ export const bookmarkPayload = z.object({
     ),
   type: bookmarkTypeEnum.default("thread"),
   callbackUrl: z.string().url().optional(),
+  additionalData: z.any().optional(),
 });
 
 export const bookmarkResponse = z.object({

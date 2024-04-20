@@ -75,7 +75,7 @@ export const getNotionDataHandler = async (userId: string) => {
 };
 
 export const bookmarkTweetHandler = async ({
-  input: { url, type = "thread", callbackUrl },
+  input: { url, type = "thread", ...rest },
   userId,
 }: BookmarkTweetPayload): Promise<BookmarkOutput> => {
   const data = await getNotionDataHandler(userId);
@@ -94,7 +94,7 @@ export const bookmarkTweetHandler = async ({
       message: "Not yet connected to Notion",
     });
   }
-  const body = { databaseId, url, type, callbackUrl };
+  const body = { databaseId, url, type, ...rest };
 
   const response = await fetch(
     `${process.env.BOOKMARKED_API_URL}/notion/bookmark-tweet`,
