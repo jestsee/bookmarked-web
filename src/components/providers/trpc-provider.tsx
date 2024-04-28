@@ -12,7 +12,7 @@ import { trpc } from "@/trpc-client/trpc";
 export const TrpcProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const url = process.env.NEXT_PUBLIC_VERCEL_URL
+  const url = process.env.NEXT_PUBLIC_VERCEL_URL // TODO use NEXTAUTH_URL instead
     ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/trpc/`
     : "http://localhost:3000/api/trpc/";
 
