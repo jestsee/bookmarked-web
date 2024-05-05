@@ -9,12 +9,17 @@ import CustomError from "./custom-error";
 
 interface Props {
   code: string;
+  state?: string;
 }
 
-const ProceedRedirect = ({ code }: Props) => {
+const ProceedRedirect = ({ code, state }: Props) => {
   const router = useRouter();
   const { mutate, error } = trpc.connectToNotion.useMutation({
     onSuccess() {
+      if (state) {
+        return router.push(state);
+      }
+
       router.push("/");
     },
   });
