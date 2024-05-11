@@ -69,5 +69,8 @@ export const connectToTelegramHandler = async ({
       ),
     );
 
-  return { status: "success", accessToken: tokenStore.value };
+  return {
+    status: "Successfully authenticated",
+    accessToken: tokenStore.value,
+  };
 };

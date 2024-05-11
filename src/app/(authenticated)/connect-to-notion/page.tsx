@@ -15,9 +15,8 @@ const ConnectToNotion = async ({ searchParams }: Props) => {
 
   if (!isConnectedToNotion) {
     const encodedUrl = encodeURIComponent(callbackUrl);
-    redirect(
-      `${process.env.NEXT_PUBLIC_NOTION_AUTHORIZATION_URL}&state=${encodedUrl}`,
-    );
+    const url = `${process.env.NEXT_PUBLIC_NOTION_AUTHORIZATION_URL}&state=${encodedUrl}`;
+    return redirect(url);
   }
 
   redirect(callbackUrl);

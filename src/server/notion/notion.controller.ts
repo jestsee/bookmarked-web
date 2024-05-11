@@ -80,7 +80,7 @@ export const bookmarkTweetHandler = async ({
 }: BookmarkTweetPayload): Promise<BookmarkOutput> => {
   const data = await getNotionDataHandler(userId);
 
-  if (!data || !data.accessToken || !data.databaseId) {
+  if (!data?.accessToken || !data.databaseId) {
     throw new TRPCError({
       code: "BAD_REQUEST",
       message: "Not yet connected to Notion",
