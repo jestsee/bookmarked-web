@@ -14,8 +14,8 @@ interface Props {
 
 const ProceedRedirect = ({ bot, telegramId }: Props) => {
   const { mutate, error } = trpc.connectToTelegram.useMutation({
-    onSuccess({ status }) {
-      const redirectUrl = `https://t.me/${bot}?start=${status}`;
+    onSuccess() {
+      const redirectUrl = `https://t.me/${bot}?start=auth`;
       window.location.href = redirectUrl;
     },
   });
