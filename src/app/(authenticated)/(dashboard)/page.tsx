@@ -19,9 +19,7 @@ const Dashboard = async () => {
           message="To use this service, please ensure you have a Notion account and connect it"
         />
         <Button asChild>
-          <Link href={process.env.NEXT_PUBLIC_NOTION_AUTHORIZATION_URL}>
-            Connect to Notion
-          </Link>
+          <Link href="/connect-to-notion">Connect to Notion</Link>
         </Button>
       </div>
     );

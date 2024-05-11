@@ -16,6 +16,7 @@ import { SearchParams } from "@/types/component";
 
 import CustomForm from "../components/custom-form";
 import { FieldConfig } from "../type";
+import errorMessage from "./errorMessage";
 
 const fieldConfigs: FieldConfig<LoginUserInput>[] = [
   { name: "email", label: "Email" },
@@ -57,7 +58,12 @@ const LoginForm = ({ searchParams }: Props) => {
   return (
     <Form {...form}>
       <form {...{ onSubmit }} className="flex flex-col gap-y-4">
-        {error && <SimpleAlert variant="destructive" message={error.message} />}
+        {error && (
+          <SimpleAlert
+            variant="destructive"
+            message={errorMessage[error.message] ?? error.message}
+          />
+        )}
         {fieldConfigs.map((fieldConfig) => (
           <CustomForm key={fieldConfig.name} {...{ form, ...fieldConfig }} />
         ))}
