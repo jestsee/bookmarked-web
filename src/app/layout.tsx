@@ -2,6 +2,7 @@ import "./globals.css";
 
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 
 import Providers from "@/components/providers";
 import { Toaster } from "@/components/ui/sonner";
@@ -21,6 +22,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <Script
+        defer
+        data-domain="bookmarked.jestsee.com"
+        src="https://plausible.coolify.jestsee.com/js/script.js"
+      />
       <body className={cn("mx-auto max-w-2xl px-4", inter.className)}>
         <Providers>
           {children}
