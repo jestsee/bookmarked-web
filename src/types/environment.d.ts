@@ -14,7 +14,7 @@ declare global {
       NEXT_PUBLIC_NOTION_AUTHORIZATION_URL: string;
       NEXTAUTH_SECRET: string;
       SESSION_TOKEN_NAME: string;
-      // ENV: "test" | "dev" | "prod";
+      ENV: "test" | "dev" | "prod";
     }
   }
 }

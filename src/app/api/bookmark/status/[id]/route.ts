@@ -1,8 +1,4 @@
-// import EventSource from "eventsource";
-
-export const runtime = "edge";
-// This is required to enable streaming
-export const dynamic = "force-dynamic";
+import EventSource from "eventsource";
 
 export async function GET(
   request: Request,
@@ -26,14 +22,12 @@ export async function GET(
   );
 
   response.onmessage = async (event) => {
-    console.log("[server onmessage]", event);
     await writer.write(
       encoder.encode(`event: message\ndata: ${event.data}\n\n`),
     );
   };
 
   response.onerror = async (event: Event & { data?: string }) => {
-    console.log("[server onerror]", event);
     if (event.data) {
       await writer.write(
         encoder.encode(`event: error\ndata: ${event.data}\n\n`),
